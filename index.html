@@ -858,7 +858,7 @@
                     <div class="deposit-info">
                         <p><strong>Informações importantes:</strong></p>
                         <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Depósito mínimo: 500 MT</li>
+                            <li>Nome do Comerciante: AGIRA-Venda Online</li>
                             <li>Saldo creditado em até 2 horas após confirmação</li>
                             <li>Guarde o comprovativo da transação</li>
                             <li>Em caso de problemas, contacte o suporte</li>
@@ -1498,8 +1498,8 @@
             const txnId = transactionId.value;
             const phone = depositPhone.value;
             
-            if (!amount || amount < 500) {
-                showAlert(depositAlert, 'O valor mínimo para depósito é 500 MT.', 'error');
+            if (!amount || amount < 0) {
+                showAlert(depositAlert, 'O valor mínimo para depósito é 0 MT.', 'error');
                 return;
             }
             
