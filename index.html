@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyCash - Plataforma de Ganhos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #f72585;
+            --secondary-dark: #e01a76;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --success-dark: #2fb6e0;
+            --warning: #f8961e;
+            --info: #4895ef;
+            --purple: #7209b7;
+            --purple-dark: #5e0896;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 0 0 25px 25px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            border-bottom: 1px solid var(--gray-light);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+            background: white;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        button.secondary {
+            background: var(--secondary);
+        }
+        
+        button.secondary:hover {
+            background: var(--secondary-dark);
+        }
+        
+        button.success {
+            background: var(--success);
+        }
+        
+        button.success:hover {
+            background: var(--success-dark);
+        }
+        
+        button.purple {
+            background: var(--purple);
+        }
+        
+        button.purple:hover {
+            background: var(--purple-dark);
+        }
+        
+        button:disabled {
+            background: #adb5bd;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        .dashboard {
+            display: none;
+        }
+        
+        .balance {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            color: var(--primary);
+            margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .timer-container {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .timer-progress {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .timer-progress-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(var(--secondary) 0%, var(--gray-light) 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 1s linear;
+        }
+        
+        .timer {
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .referral-code {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .referral-code span {
+            font-weight: bold;
+            font-size: 20px;
+            display: block;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .history {
+            max-height: 300px;
+            overflow-y: auto;
+            border-radius: 8px;
+            border: 1px solid var(--gray-light);
+        }
+        
+        .history-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .history-item:hover {
+            background: var(--gray-light);
+        }
+        
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        
+        .history-item-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .history-item-date {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+        
+        .positive {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .negative {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .info {
+            color: var(--info);
+        }
+        
+        .purple-text {
+            color: var(--purple);
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--gray-light);
+            overflow-x: auto;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            white-space: nowrap;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .alert-success {
+            background: rgba(76, 201, 240, 0.15);
+            color: #0c5460;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+        
+        .alert-error {
+            background: rgba(248, 37, 133, 0.15);
+            color: #721c24;
+            border: 1px solid rgba(248, 37, 133, 0.3);
+        }
+        
+        .alert-info {
+            background: rgba(72, 149, 239, 0.15);
+            color: #0c5460;
+            border: 1px solid rgba(72, 149, 239, 0.3);
+        }
+        
+        .alert-warning {
+            background: rgba(248, 150, 30, 0.15);
+            color: #856404;
+            border: 1px solid rgba(248, 150, 30, 0.3);
+        }
+        
+        .paga-facil-info {
+            background: linear-gradient(135deg, #e9f7fe, #f0f4ff);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .paga-facil-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        
+        .paga-facil-logo span {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .withdraw-info, .deposit-info {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 20px;
+            background: var(--gray-light);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .bonus-badge {
+            background: var(--warning);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .primary-login-badge {
+            background: var(--purple);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .merchant-code {
+            background: linear-gradient(135deg, var(--info), var(--primary));
+            color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .steps {
+            margin: 25px 0;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .login-bonus {
+            background: linear-gradient(135deg, var(--purple), var(--primary));
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .login-bonus h3 {
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+        
+        .login-bonus p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: var(--gray);
+            font-size: 14px;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .consecutive-days {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 10px;
+        }
+        
+        .day-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray-light);
+        }
+        
+        .day-indicator.active {
+            background: var(--success);
+        }
+        
+        .day-indicator.today {
+            border: 2px solid var(--success);
+            background: white;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+        
+        .notification.error {
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .notification.info {
+            border-left: 4px solid var(--info);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .timer {
+                font-size: 36px;
+            }
+            
+            .balance {
+                font-size: 30px;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-progress {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .timer {
+                font-size: 32px;
+            }
+            
+            .notification {
+                right: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">Operação realizada com sucesso!</span>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">FlyCash</div>
+            <div class="tagline">Ganhe 25MT por cadastro + 5 minutos de visualização diária</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Tela de Login/Registro -->
+        <div id="auth-screen" class="card">
+            <h2 class="card-title"><i class="fas fa-user"></i> Entrar / Registar</h2>
+            <div id="auth-alert" class="alert" style="display: none;"></div>
+            
+            <div class="form-group">
+                <label for="phone"><i class="fas fa-phone"></i> Número de Telefone</label>
+                <input type="tel" id="phone" placeholder="">
+            </div>
+            
+            <div class="form-group">
+                <label for="password"><i class="fas fa-lock"></i> Palavra-passe</label>
+                <input type="password" id="password" placeholder="Mínimo 6 caracteres">
+            </div>
+            
+            <div class="form-group">
+                <label for="referral-code"><i class="fas fa-user-friends"></i> Código de Referência (opcional)</label>
+                <input type="text" id="referral-code" placeholder="Código do amigo">
+            </div>
+            
+            <button id="login-btn" class="btn-full"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+            <button id="register-btn" class="secondary btn-full" style="margin-top: 10px;"><i class="fas fa-user-plus"></i> Registar <span class="bonus-badge">+25MT</span></button>
+        </div>
+        
+        <!-- Dashboard do Usuário -->
+        <div id="dashboard" class="dashboard">
+            <!-- Banner de Login Primária -->
+            <div id="primary-login-banner" class="login-bonus" style="display: none;">
+                <h3> Login Primária Concluído!</h3>
+                <p>Você ganhou <strong>15 MT</strong> pelo seu primeiro login do dia!</p>
+            </div>
+            
+            <div class="card">
+                <div class="balance">
+                    Saldo: <span id="user-balance">0</span> MT
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-logins">0</div>
+                        <div class="stat-label">Logins Hoje</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="primary-logins">0</div>
+                        <div class="stat-label">Login Primária</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-earned">0 MT</div>
+                        <div class="stat-label">Total Ganho</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="referral-count">0</div>
+                        <div class="stat-label">Referências</div>
+                    </div>
+                </div>
+                
+                <div class="consecutive-days" id="consecutive-days">
+                    <!-- Dias consecutivos serão preenchidos dinamicamente -->
+                </div>
+                
+                <div class="timer-container">
+                    <h3><i class="fas fa-clock"></i> Tempo de Visualização Diário</h3>
+                    <div class="timer-progress">
+                        <div class="timer-progress-circle" id="timer-progress">
+                            <div class="timer" id="timer">05:00</div>
+                        </div>
+                    </div>
+                    <button id="start-timer" class="secondary btn-full"><i class="fas fa-play"></i> Iniciar Visualização</button>
+                    <p style="margin-top: 10px; font-size: 14px; color: var(--gray);">
+                        Complete 5 minutos e ganhe <strong>10 MT</strong> todos os dias!
+                    </p>
+                </div>
+                
+                <div class="referral-code">
+                    <i class="fas fa-share-alt"></i> Seu código de referência: 
+                    <span id="user-referral-code">CARREGANDO...</span>
+                    <button id="copy-referral-code" class="copy-btn"><i class="fas fa-copy"></i> Copiar</button>
+                    <p style="margin-top: 10px; font-size: 14px;">
+                        Compartilhe este código e ganhe <strong>25 MT</strong> por cada amigo que se registar!
+                    </p>
+                </div>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tab active" data-tab="deposit"><i class="fas fa-money-bill-wave"></i> Depositar</div>
+                <div class="tab" data-tab="withdraw"><i class="fas fa-wallet"></i> Levantamentos</div>
+                <div class="tab" data-tab="history"><i class="fas fa-history"></i> Histórico</div>
+                <div class="tab" data-tab="referrals"><i class="fas fa-user-friends"></i> Referências</div>
+                <div class="tab" data-tab="profile"><i class="fas fa-user"></i> Perfil</div>
+            </div>
+            
+            <!-- Aba de Depósito -->
+            <div id="deposit-tab" class="tab-content active">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-money-bill-wave"></i> Depositar via Paga Fácil</h3>
+                    
+                    <div class="paga-facil-info">
+                        <div class="paga-facil-logo">
+                            <span>PAGA FÁCIL</span>
+                        </div>
+                        <p>Depósito rápido e seguro usando código de comerciante</p>
+                    </div>
+                    
+                    <div id="deposit-alert" class="alert" style="display: none;"></div>
+                    
+                    <div class="merchant-code">
+                        Código do Comerciante: <span id="merchant-code">1201411</span>
+                        <button id="copy-merchant-code" class="copy-btn"><i class="fas fa-copy"></i> Copiar</button>
+                    </div>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <strong>Abra a aplicação Paga Fácil</strong>
+                                <p>No seu telemóvel, abra a aplicação Paga Fácil e faça login na sua conta.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <strong>Selecione "Pagar"</strong>
+                                <p>Na tela principal, selecione a opção "Pagar" ou "Pagamentos".</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <strong>Digite o código do comerciante</strong>
+                                <p>Insira o código <strong>1201411</strong> no campo destinado ao código do comerciante.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <strong>Insira o valor e confirme</strong>
+                                <p>Digite o valor que deseja depositar e confirme a transação.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <strong>Registre o comprovativo</strong>
+                                <p>Após o pagamento, registre o comprovativo abaixo para creditarmos o seu saldo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deposit-amount"><i class="fas fa-money-bill"></i> Valor Depositado (MT)</label>
+                        <input type="number" id="deposit-amount" min="50" placeholder="Mínimo: 50 MT">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="transaction-id"><i class="fas fa-receipt"></i> ID da Transação Paga Fácil</label>
+                        <input type="text" id="transaction-id" placeholder="ID da transação (ex: PF123456789)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deposit-phone"><i class="fas fa-phone"></i> Seu Número Paga Fácil</label>
+                        <input type="tel" id="deposit-phone" placeholder="Número usado no Paga Fácil">
+                    </div>
+                    
+                    <button id="confirm-deposit" class="success btn-full"><i class="fas fa-check-circle"></i> Confirmar Depósito</button>
+                    
+                    <div class="deposit-info">
+                        <p><strong>Informações importantes:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Depósito mínimo: 50 MT</li>
+                            <li>Saldo creditado em até 2 horas após confirmação</li>
+                            <li>Guarde o comprovativo da transação</li>
+                            <li>Em caso de problemas, contacte o suporte</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aba de Levantamentos -->
+            <div id="withdraw-tab" class="tab-content">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-wallet"></i> Fazer Levantamento via Paga Fácil</h3>
+                    
+                    <div class="paga-facil-info">
+                        <div class="paga-facil-logo">
+                            <span>PAGA FÁCIL</span>
+                        </div>
+                        <p>Transferência rápida e segura para sua conta Paga Fácil</p>
+                    </div>
+                    
+                    <div id="withdraw-alert" class="alert" style="display: none;"></div>
+                    
+                    <div class="form-group">
+                        <label for="withdraw-amount"><i class="fas fa-money-bill-wave"></i> Valor (MT)</label>
+                        <input type="number" id="withdraw-amount" min="100" placeholder="Mínimo: 100 MT">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paga-facil-number"><i class="fas fa-phone"></i> Número Paga Fácil</label>
+                        <input type="tel" id="paga-facil-number" placeholder="Número associado ao Paga Fácil">
+                    </div>
+                    
+                    <button id="request-withdraw" class="btn-full"><i class="fas fa-paper-plane"></i> Solicitar Levantamento</button>
+                    
+                    <div class="withdraw-info">
+                        <p><strong>Informações importantes:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Valor mínimo para levantamento: 100 MT</li>
+                            <li>Taxa de processamento: 5 MT por transação</li>
+                            <li>Processamento em até 24 horas</li>
+                            <li>Certifique-se que o número Paga Fácil está correto</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aba de Histórico -->
+            <div id="history-tab" class="tab-content">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-history"></i> Histórico de Transações</h3>
+                    <div class="history" id="transaction-history">
+                        <!-- Histórico será preenchido dinamicamente -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aba de Referências -->
+            <div id="referrals-tab" class="tab-content">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-user-friends"></i> Suas Referências</h3>
+                    <p>Ganhe 25 MT por cada pessoa que se registar com o seu código!</p>
+                    
+                    <div class="referral-code" style="margin: 20px 0;">
+                        <i class="fas fa-link"></i> Seu link de referência: <br>
+                        <span id="user-referral-link">CARREGANDO...</span>
+                        <button id="copy-referral-link" class="copy-btn"><i class="fas fa-copy"></i> Copiar</button>
+                    </div>
+                    
+                    <div class="history">
+                        <div class="history-item">
+                            <span>Total de referências</span>
+                            <span id="total-referrals">0</span>
+                        </div>
+                        <div class="history-item">
+                            <span>Ganhos com referências</span>
+                            <span class="positive" id="referral-earnings">0 MT</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aba de Perfil -->
+            <div id="profile-tab" class="tab-content">
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-user"></i> Seu Perfil</h3>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Número de Telefone</label>
+                        <input type="text" id="profile-phone" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> Data de Registro</label>
+                        <input type="text" id="profile-register-date" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-chart-line"></i> Total Ganho</label>
+                        <input type="text" id="profile-total-earned" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-money-bill"></i> Total Depositado</label>
+                        <input type="text" id="profile-total-deposited" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-sign-in-alt"></i> Login Primária Hoje</label>
+                        <input type="text" id="profile-primary-login" readonly>
+                    </div>
+                    
+                    <button id="logout-btn" class="secondary btn-full"><i class="fas fa-sign-out-alt"></i> Terminar Sessão</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Flycash &copy; 2025 - Ganhe 25MT por cadastro + 5 minutos de visualização diária</p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                Uma Plantaforma segura é flexível.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Variáveis globais
+        let currentUser = null;
+        let timerInterval = null;
+        let timeLeft = 300; // 5 minutos em segundos
+        let timerRunning = false;
+        
+        // Elementos DOM
+        const authScreen = document.getElementById('auth-screen');
+        const dashboard = document.getElementById('dashboard');
+        const authAlert = document.getElementById('auth-alert');
+        const withdrawAlert = document.getElementById('withdraw-alert');
+        const depositAlert = document.getElementById('deposit-alert');
+        const primaryLoginBanner = document.getElementById('primary-login-banner');
+        const userBalance = document.getElementById('user-balance');
+        const timerDisplay = document.getElementById('timer');
+        const timerProgress = document.getElementById('timer-progress');
+        const startTimerBtn = document.getElementById('start-timer');
+        const userReferralCode = document.getElementById('user-referral-code');
+        const userReferralLink = document.getElementById('user-referral-link');
+        const totalReferrals = document.getElementById('total-referrals');
+        const referralEarnings = document.getElementById('referral-earnings');
+        const withdrawAmount = document.getElementById('withdraw-amount');
+        const pagaFacilNumber = document.getElementById('paga-facil-number');
+        const depositAmount = document.getElementById('deposit-amount');
+        const transactionId = document.getElementById('transaction-id');
+        const depositPhone = document.getElementById('deposit-phone');
+        const transactionHistory = document.getElementById('transaction-history');
+        const profilePhone = document.getElementById('profile-phone');
+        const profileRegisterDate = document.getElementById('profile-register-date');
+        const profileTotalEarned = document.getElementById('profile-total-earned');
+        const profileTotalDeposited = document.getElementById('profile-total-deposited');
+        const profilePrimaryLogin = document.getElementById('profile-primary-login');
+        const totalLogins = document.getElementById('total-logins');
+        const primaryLogins = document.getElementById('primary-logins');
+        const totalEarned = document.getElementById('total-earned');
+        const referralCount = document.getElementById('referral-count');
+        const consecutiveDaysContainer = document.getElementById('consecutive-days');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se o usuário já está logado
+            checkLoginStatus();
+            
+            // Event Listeners
+            document.getElementById('login-btn').addEventListener('click', login);
+            document.getElementById('register-btn').addEventListener('click', register);
+            document.getElementById('request-withdraw').addEventListener('click', requestWithdraw);
+            document.getElementById('confirm-deposit').addEventListener('click', confirmDeposit);
+            document.getElementById('logout-btn').addEventListener('click', logout);
+            startTimerBtn.addEventListener('click', toggleTimer);
+            
+            // Botões de cópia
+            document.getElementById('copy-referral-code').addEventListener('click', function() {
+                copyToClipboard(userReferralCode.textContent);
+                showNotification('Código de referência copiado!', 'success');
+            });
+            
+            document.getElementById('copy-referral-link').addEventListener('click', function() {
+                copyToClipboard(userReferralLink.textContent);
+                showNotification('Link de referência copiado!', 'success');
+            });
+            
+            document.getElementById('copy-merchant-code').addEventListener('click', function() {
+                copyToClipboard(document.getElementById('merchant-code').textContent);
+                showNotification('Código do comerciante copiado!', 'success');
+            });
+            
+            // Verificar código de referência na URL
+            checkUrlReferral();
+            
+            // Tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remover classe active de todas as tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Adicionar classe active à tab clicada
+                    this.classList.add('active');
+                    
+                    // Esconder todos os conteúdos
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Mostrar o conteúdo correspondente
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+        
+        // Verificar status de login
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showDashboard();
+            }
+        }
+        
+        // Verificar código de referência na URL
+        function checkUrlReferral() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            if (refCode) {
+                document.getElementById('referral-code').value = refCode;
+            }
+        }
+        
+        // Função de login
+        function login() {
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            
+            if (!phone || !password) {
+                showAlert(authAlert, 'Por favor, preencha todos os campos.', 'error');
+                return;
+            }
+            
+            // Verificar se o usuário existe
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.phone === phone && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                
+                // Verificar login primária
+                checkPrimaryLogin();
+                
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showDashboard();
+                showNotification('Login realizado com sucesso!', 'success');
+            } else {
+                showAlert(authAlert, 'Número de telefone ou palavra-passe incorretos.', 'error');
+            }
+        }
+        
+        // Verificar e processar login primária
+        function checkPrimaryLogin() {
+            const today = new Date().toDateString();
+            const lastLoginDate = localStorage.getItem(`lastLogin_${currentUser.phone}`);
+            
+            // Se não fez login hoje, é login primária
+            if (lastLoginDate !== today) {
+                // Primeiro login do dia - dar bônus
+                const primaryLoginBonus = 15; // 15 MT pelo primeiro login
+                currentUser.balance += primaryLoginBonus;
+                currentUser.transactions.push({
+                    type: 'primary_login',
+                    amount: primaryLoginBonus,
+                    description: 'Bónus de Login Primária',
+                    date: new Date().toISOString()
+                });
+                
+                // Atualizar estatísticas
+                if (!currentUser.loginStats) {
+                    currentUser.loginStats = {
+                        totalLogins: 0,
+                        primaryLogins: 0,
+                        consecutiveDays: 0
+                    };
+                }
+                
+                currentUser.loginStats.totalLogins++;
+                currentUser.loginStats.primaryLogins++;
+                
+                // Verificar dias consecutivos
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                const yesterdayString = yesterday.toDateString();
+                
+                if (lastLoginDate === yesterdayString) {
+                    currentUser.loginStats.consecutiveDays++;
+                } else {
+                    currentUser.loginStats.consecutiveDays = 1;
+                }
+                
+                // Mostrar banner de login primária
+                primaryLoginBanner.style.display = 'block';
+                
+                // Atualizar último login
+                localStorage.setItem(`lastLogin_${currentUser.phone}`, today);
+                
+                // Atualizar usuário no localStorage
+                updateUserInStorage();
+                
+                showNotification(`Login primária! Ganhou ${primaryLoginBonus} MT de bónus.`, 'success');
+            } else {
+                // Já fez login hoje, apenas atualizar contador
+                if (currentUser.loginStats) {
+                    currentUser.loginStats.totalLogins++;
+                }
+                primaryLoginBanner.style.display = 'none';
+            }
+        }
+        
+        // Função de registro
+        function register() {
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const referralCode = document.getElementById('referral-code').value;
+            
+            if (!phone || !password) {
+                showAlert(authAlert, 'Por favor, preencha todos os campos obrigatórios.', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showAlert(authAlert, 'A palavra-passe deve ter pelo menos 6 caracteres.', 'error');
+                return;
+            }
+            
+            // Verificar se o usuário já existe
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(u => u.phone === phone)) {
+                showAlert(authAlert, 'Este número de telefone já está registado.', 'error');
+                return;
+            }
+            
+            // Criar novo usuário
+            const newUser = {
+                phone: phone,
+                password: password,
+                balance: 25, // 25 MT de bónus de registro
+                referralCode: generateReferralCode(),
+                referredBy: referralCode || null,
+                referrals: [],
+                transactions: [
+                    {
+                        type: 'bonus',
+                        amount: 25,
+                        description: 'Bónus de registro',
+                        date: new Date().toISOString()
+                    }
+                ],
+                registerDate: new Date().toISOString(),
+                dailyTimerUsed: false,
+                totalDeposited: 0,
+                loginStats: {
+                    totalLogins: 1,
+                    primaryLogins: 1,
+                    consecutiveDays: 1
+                }
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Se foi usado um código de referência, adicionar bónus ao referenciador
+            if (referralCode) {
+                const referrer = users.find(u => u.referralCode === referralCode);
+                if (referrer) {
+                    referrer.balance += 25;
+                    referrer.transactions.push({
+                        type: 'referral',
+                        amount: 25,
+                        description: `Bónus de referência: ${phone}`,
+                        date: new Date().toISOString()
+                    });
+                    referrer.referrals.push(phone);
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+            }
+            
+            currentUser = newUser;
+            
+            // Registrar primeiro login
+            const today = new Date().toDateString();
+            localStorage.setItem(`lastLogin_${currentUser.phone}`, today);
+            
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            showDashboard();
+            
+            // Mostrar banner de login primária para novo usuário
+            primaryLoginBanner.style.display = 'block';
+            
+            showNotification('Registro realizado com sucesso! Ganhou 25 MT de bónus + 15 MT de login primária.', 'success');
+        }
+        
+        // Mostrar dashboard
+        function showDashboard() {
+            authScreen.style.display = 'none';
+            dashboard.style.display = 'block';
+            
+            // Atualizar informações do usuário
+            updateUserInfo();
+        }
+        
+        // Atualizar informações do usuário
+        function updateUserInfo() {
+            if (!currentUser) return;
+            
+            userBalance.textContent = currentUser.balance;
+            userReferralCode.textContent = currentUser.referralCode;
+            userReferralLink.textContent = window.location.href.split('?')[0] + '?ref=' + currentUser.referralCode;
+            
+            // Atualizar estatísticas de referências
+            totalReferrals.textContent = currentUser.referrals.length;
+            const referralTotal = currentUser.transactions
+                .filter(t => t.type === 'referral')
+                .reduce((sum, t) => sum + t.amount, 0);
+            referralEarnings.textContent = referralTotal + ' MT';
+            
+            // Atualizar estatísticas de login
+            if (currentUser.loginStats) {
+                totalLogins.textContent = currentUser.loginStats.totalLogins;
+                primaryLogins.textContent = currentUser.loginStats.primaryLogins;
+            }
+            
+            // Atualizar histórico
+            updateTransactionHistory();
+            
+            // Atualizar perfil
+            updateProfile();
+            
+            // Atualizar indicador de dias consecutivos
+            updateConsecutiveDays();
+            
+            // Verificar se o timer diário já foi usado hoje
+            const today = new Date().toDateString();
+            const lastTimerUse = localStorage.getItem(`timerUsed_${currentUser.phone}`);
+            if (lastTimerUse === today) {
+                startTimerBtn.disabled = true;
+                startTimerBtn.textContent = 'Timer Diário Já Utilizado';
+                timerDisplay.textContent = '00:00';
+                timerProgress.style.background = 'conic-gradient(var(--secondary) 100%, var(--gray-light) 0%)';
+            } else {
+                startTimerBtn.disabled = false;
+                startTimerBtn.textContent = 'Iniciar Visualização';
+                timerDisplay.textContent = '05:00';
+                timeLeft = 300;
+                timerProgress.style.background = 'conic-gradient(var(--secondary) 0%, var(--gray-light) 0%)';
+            }
+        }
+        
+        // Atualizar indicador de dias consecutivos
+        function updateConsecutiveDays() {
+            if (!currentUser.loginStats) return;
+            
+            consecutiveDaysContainer.innerHTML = '';
+            const consecutiveDays = currentUser.loginStats.consecutiveDays || 0;
+            
+            // Criar indicadores para os últimos 7 dias
+            for (let i = 6; i >= 0; i--) {
+                const dayIndicator = document.createElement('div');
+                dayIndicator.className = 'day-indicator';
+                
+                // Verificar se é um dia com login
+                if (i < consecutiveDays) {
+                    dayIndicator.classList.add('active');
+                }
+                
+                // Marcar o dia atual
+                if (i === 0) {
+                    dayIndicator.classList.add('today');
+                }
+                
+                consecutiveDaysContainer.appendChild(dayIndicator);
+            }
+            
+            // Adicionar texto informativo
+            const infoText = document.createElement('div');
+            infoText.textContent = `${consecutiveDays} dias consecutivos`;
+            infoText.style.fontSize = '14px';
+            infoText.style.color = 'var(--gray)';
+            infoText.style.marginTop = '10px';
+            consecutiveDaysContainer.appendChild(infoText);
+        }
+        
+        // Atualizar histórico de transações
+        function updateTransactionHistory() {
+            transactionHistory.innerHTML = '';
+            
+            if (currentUser.transactions.length === 0) {
+                transactionHistory.innerHTML = '<div class="history-item">Nenhuma transação encontrada</div>';
+                return;
+            }
+            
+            // Ordenar transações por data (mais recente primeiro)
+            const sortedTransactions = [...currentUser.transactions].sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+            
+            sortedTransactions.forEach(transaction => {
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                
+                const details = document.createElement('div');
+                details.className = 'history-item-details';
+                
+                const description = document.createElement('span');
+                description.textContent = transaction.description;
+                
+                const date = document.createElement('span');
+                date.className = 'history-item-date';
+                date.textContent = new Date(transaction.date).toLocaleDateString('pt-PT', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                details.appendChild(description);
+                details.appendChild(date);
+                
+                const amount = document.createElement('span');
+                
+                if (transaction.type === 'withdraw') {
+                    amount.textContent = '-' + transaction.amount + ' MT';
+                    amount.className = 'negative';
+                } else if (transaction.type === 'deposit') {
+                    amount.textContent = '+' + transaction.amount + ' MT';
+                    amount.className = 'info';
+                } else if (transaction.type === 'primary_login') {
+                    amount.textContent = '+' + transaction.amount + ' MT';
+                    amount.className = 'purple-text';
+                } else {
+                    amount.textContent = '+' + transaction.amount + ' MT';
+                    amount.className = 'positive';
+                }
+                
+                item.appendChild(details);
+                item.appendChild(amount);
+                transactionHistory.appendChild(item);
+            });
+        }
+        
+        // Atualizar perfil
+        function updateProfile() {
+            profilePhone.value = currentUser.phone;
+            
+            const registerDate = new Date(currentUser.registerDate);
+            profileRegisterDate.value = registerDate.toLocaleDateString('pt-PT');
+            
+            const totalEarnedValue = currentUser.transactions
+                .filter(t => t.type !== 'withdraw' && t.type !== 'deposit')
+                .reduce((sum, t) => sum + t.amount, 0);
+            profileTotalEarned.value = totalEarnedValue + ' MT';
+            totalEarned.textContent = totalEarnedValue + ' MT';
+            
+            profileTotalDeposited.value = currentUser.totalDeposited + ' MT';
+            
+            if (currentUser.loginStats) {
+                profilePrimaryLogin.value = currentUser.loginStats.primaryLogins > 0 ? 'Sim' : 'Não';
+            }
+            
+            referralCount.textContent = currentUser.referrals.length;
+        }
+        
+        // Controlar o timer
+        function toggleTimer() {
+            if (timerRunning) {
+                // Parar o timer
+                clearInterval(timerInterval);
+                timerRunning = false;
+                startTimerBtn.innerHTML = '<i class="fas fa-play"></i> Continuar Visualização';
+            } else {
+                // Iniciar o timer
+                timerRunning = true;
+                startTimerBtn.innerHTML = '<i class="fas fa-pause"></i> Parar Visualização';
+                
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    
+                    // Atualizar display
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    // Atualizar progresso visual
+                    const progress = ((300 - timeLeft) / 300) * 100;
+                    timerProgress.style.background = `conic-gradient(var(--secondary) ${progress}%, var(--gray-light) 0%)`;
+                    
+                    // Timer terminado
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        
+                        // Adicionar recompensa
+                        currentUser.balance += 10; // 10 MT por 5 minutos
+                        currentUser.transactions.push({
+                            type: 'timer',
+                            amount: 10,
+                            description: 'Recompensa de visualização (5 minutos)',
+                            date: new Date().toISOString()
+                        });
+                        
+                        // Atualizar localStorage
+                        updateUserInStorage();
+                        updateUserInfo();
+                        
+                        // Marcar como usado hoje
+                        const today = new Date().toDateString();
+                        localStorage.setItem(`timerUsed_${currentUser.phone}`, today);
+                        
+                        startTimerBtn.disabled = true;
+                        startTimerBtn.textContent = 'Timer Diário Concluído';
+                        
+                        showNotification('Parabéns! Ganhou 10 MT por completar 5 minutos de visualização.', 'success');
+                    }
+                }, 1000);
+            }
+        }
+        
+        // Confirmar depósito
+        function confirmDeposit() {
+            const amount = parseInt(depositAmount.value);
+            const txnId = transactionId.value;
+            const phone = depositPhone.value;
+            
+            if (!amount || amount < 50) {
+                showAlert(depositAlert, 'O valor mínimo para depósito é 50 MT.', 'error');
+                return;
+            }
+            
+            if (!txnId) {
+                showAlert(depositAlert, 'Por favor, insira o ID da transação Paga Fácil.', 'error');
+                return;
+            }
+            
+            if (!phone) {
+                showAlert(depositAlert, 'Por favor, insira o seu número Paga Fácil.', 'error');
+                return;
+            }
+            
+            // Simular processamento de depósito
+            currentUser.balance += amount;
+            currentUser.totalDeposited += amount;
+            currentUser.transactions.push({
+                type: 'deposit',
+                amount: amount,
+                description: `Depósito via Paga Fácil (ID: ${txnId})`,
+                date: new Date().toISOString()
+            });
+            
+            // Atualizar localStorage
+            updateUserInStorage();
+            updateUserInfo();
+            
+            showNotification(`Depósito de ${amount} MT confirmado com sucesso! Saldo creditado.`, 'success');
+            
+            // Limpar formulário
+            depositAmount.value = '';
+            transactionId.value = '';
+            depositPhone.value = '';
+        }
+        
+        // Solicitar levantamento
+        function requestWithdraw() {
+            const amount = parseInt(withdrawAmount.value);
+            const pagaFacil = pagaFacilNumber.value;
+            
+            if (!amount || amount < 100) {
+                showAlert(withdrawAlert, 'O valor mínimo para levantamento é 100 MT.', 'error');
+                return;
+            }
+            
+            if (!pagaFacil) {
+                showAlert(withdrawAlert, 'Por favor, insira o seu número Paga Fácil.', 'error');
+                return;
+            }
+            
+            if (amount > currentUser.balance) {
+                showAlert(withdrawAlert, 'Saldo insuficiente para este levantamento.', 'error');
+                return;
+            }
+            
+            // Processar levantamento
+            const tax = 5; // Taxa de 5 MT
+            const totalDeduction = amount + tax;
+            
+            currentUser.balance -= totalDeduction;
+            currentUser.transactions.push({
+                type: 'withdraw',
+                amount: amount,
+                description: `Levantamento via Paga Fácil para ${pagaFacil} (taxa: ${tax} MT)`,
+                date: new Date().toISOString()
+            });
+            
+            // Atualizar localStorage
+            updateUserInStorage();
+            updateUserInfo();
+            
+            showNotification(`Levantamento de ${amount} MT solicitado com sucesso! Será processado em até 24 horas.`, 'success');
+            
+            // Limpar formulário
+            withdrawAmount.value = '';
+            pagaFacilNumber.value = '';
+        }
+        
+        // Terminar sessão
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            dashboard.style.display = 'none';
+            authScreen.style.display = 'block';
+            
+            // Limpar formulários
+            document.getElementById('phone').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('referral-code').value = '';
+            
+            // Parar o timer se estiver a correr
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+            }
+            
+            showNotification('Sessão terminada com sucesso!', 'info');
+        }
+        
+        // Atualizar usuário no localStorage
+        function updateUserInStorage() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.phone === currentUser.phone);
+            if (userIndex !== -1) {
+                users[userIndex] = currentUser;
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+        }
+        
+        // Gerar código de referência
+        function generateReferralCode() {
+            return Math.random().toString(36).substring(2, 8).toUpperCase();
+        }
+        
+        // Mostrar alertas
+        function showAlert(alertElement, message, type) {
+            alertElement.textContent = message;
+            alertElement.className = 'alert';
+            alertElement.classList.add('alert-' + type);
+            alertElement.style.display = 'block';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Mostrar notificação
+        function showNotification(message, type) {
+            notificationText.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            // Definir ícone baseado no tipo
+            const icon = notification.querySelector('i');
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 
+                            type === 'error' ? 'fas fa-exclamation-circle' : 
+                            'fas fa-info-circle';
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Copiar para a área de transferência
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>
