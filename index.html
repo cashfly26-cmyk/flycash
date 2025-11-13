@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyCash - Plataforma de Ganhos</title>
+    <title>FlyCash - Plataforma de Investimento</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -840,12 +840,12 @@
                     
                     <div class="form-group">
                         <label for="deposit-amount"><i class="fas fa-money-bill"></i> Valor Depositado (MT)</label>
-                        <input type="number" id="deposit-amount" min="50" placeholder="Mínimo: 50 MT">
+                        <input type="number" id="deposit-amount" min="500" placeholder="Mínimo: 500 MT">
                     </div>
                     
                     <div class="form-group">
                         <label for="transaction-id"><i class="fas fa-receipt"></i> ID da Transação Paga Fácil</label>
-                        <input type="text" id="transaction-id" placeholder="ID da transação (ex: PF123456789)">
+                        <input type="text" id="transaction-id" placeholder="ID da transação:">
                     </div>
                     
                     <div class="form-group">
@@ -858,7 +858,7 @@
                     <div class="deposit-info">
                         <p><strong>Informações importantes:</strong></p>
                         <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Depósito mínimo: 50 MT</li>
+                            <li>Depósito mínimo: 500 MT</li>
                             <li>Saldo creditado em até 2 horas após confirmação</li>
                             <li>Guarde o comprovativo da transação</li>
                             <li>Em caso de problemas, contacte o suporte</li>
@@ -979,8 +979,8 @@
     <footer>
         <div class="container">
             <p>Flycash &copy; 2025 - Ganhe 25MT por cadastro + 5 minutos de visualização diária</p>
-            <p style="margin-top: 10px; font-size: 12px;">
-                Uma Plantaforma segura é flexível.
+            <p style="margin-top: 10px; font-size: 12px;"> <h3>Atendimento ao Cliente</h3>
+            Telegram=>https://t.me/+lG0ooPqxwxQ3Nzc0
             </p>
         </div>
     </footer>
@@ -1132,7 +1132,7 @@
             // Se não fez login hoje, é login primária
             if (lastLoginDate !== today) {
                 // Primeiro login do dia - dar bônus
-                const primaryLoginBonus = 15; // 15 MT pelo primeiro login
+                const primaryLoginBonus = 25; // 25 MT pelo primeiro login
                 currentUser.balance += primaryLoginBonus;
                 currentUser.transactions.push({
                     type: 'primary_login',
@@ -1467,10 +1467,10 @@
                         timerRunning = false;
                         
                         // Adicionar recompensa
-                        currentUser.balance += 10; // 10 MT por 5 minutos
+                        currentUser.balance += 0.50; // 0.50 MT por 5 minutos
                         currentUser.transactions.push({
                             type: 'timer',
-                            amount: 10,
+                            amount: 0.50,
                             description: 'Recompensa de visualização (5 minutos)',
                             date: new Date().toISOString()
                         });
@@ -1486,7 +1486,7 @@
                         startTimerBtn.disabled = true;
                         startTimerBtn.textContent = 'Timer Diário Concluído';
                         
-                        showNotification('Parabéns! Ganhou 10 MT por completar 5 minutos de visualização.', 'success');
+                        showNotification('Parabéns! Ganhou 0.50 MT por completar 5 minutos de visualização.', 'success');
                     }
                 }, 1000);
             }
@@ -1498,8 +1498,8 @@
             const txnId = transactionId.value;
             const phone = depositPhone.value;
             
-            if (!amount || amount < 50) {
-                showAlert(depositAlert, 'O valor mínimo para depósito é 50 MT.', 'error');
+            if (!amount || amount < 500) {
+                showAlert(depositAlert, 'O valor mínimo para depósito é 500 MT.', 'error');
                 return;
             }
             
