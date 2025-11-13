@@ -1310,7 +1310,7 @@
             const lastTimerUse = localStorage.getItem(`timerUsed_${currentUser.phone}`);
             if (lastTimerUse === today) {
                 startTimerBtn.disabled = true;
-                startTimerBtn.textContent = 'Timer Diário Já Utilizado';
+                startTimerBtn.textContent = 'Minutos Diário Já Utilizado';
                 timerDisplay.textContent = '00:00';
                 timerProgress.style.background = 'conic-gradient(var(--secondary) 100%, var(--gray-light) 0%)';
             } else {
