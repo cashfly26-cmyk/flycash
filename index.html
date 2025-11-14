@@ -880,7 +880,7 @@
             
             <div class="form-group">
                 <label for="phone"><i class="fas fa-phone"></i> Número de Telefone</label>
-                <input type="tel" id="phone" placeholder="Ex: 841234567">
+                <input type="tel" id="phone" placeholder="+258">
             </div>
             
             <div class="form-group">
@@ -1082,7 +1082,7 @@
                     
                     <div class="form-group">
                         <label for="deposit-amount"><i class="fas fa-money-bill"></i> Valor Depositado (MT)</label>
-                        <input type="number" id="deposit-amount" min="500" placeholder="Mínimo: 500 MT">
+                        <input type="number" id="deposit-amount" min="50000" placeholder="Insira o Valor">
                     </div>
                     
                     <div class="form-group">
@@ -1836,12 +1836,12 @@
             if (!machine) return;
             
             const message = `
-                💠 ${machine.name}
-                💰 Investimento: ${machine.price} MT
-                📈 Retorno: ${machine.return} MT
-                🎯 Lucro: ${machine.profit}
+                 ${machine.name}
+                 Investimento: ${machine.price} MT
+                 Retorno: ${machine.return} MT
+                 Lucro: ${machine.profit}
                 ⏰ Duração: ${machine.duration} horas
-                📊 ROI: ${machine.roi}
+                 ROI: ${machine.roi}
                 ${machine.description}
             `;
             
@@ -2128,8 +2128,8 @@
             const txnId = transactionId.value;
             const phone = depositPhone.value;
             
-            if (!amount || amount < 500) {
-                showAlert(depositAlert, 'O valor mínimo para depósito é 500 MT.', 'error');
+            if (!amount || amount < 50000) {
+                showAlert(depositAlert, 'O valor mínimo para depósito é 2300MT.', 'error');
                 return;
             }
             
