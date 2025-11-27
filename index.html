@@ -3,27 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyCash - Plataforma de Investimento</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>BetGlobal - Plataforma Completa de Apostas</title>
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #f72585;
-            --secondary-dark: #e01a76;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --success-dark: #2fb6e0;
-            --warning: #f8961e;
-            --info: #4895ef;
-            --purple: #7209b7;
-            --purple-dark: #5e0896;
-            --gray: #6c757d;
-            --gray-light: #e9ecef;
-            --border-radius: 12px;
-            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --primary: #1a5f23;
+            --secondary: #0d3b14;
+            --accent: #ffcc00;
+            --light: #f5f5f5;
+            --dark: #333;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --live: #e74c3c;
+            --warning: #f39c12;
         }
         
         * {
@@ -34,2257 +25,2337 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background-color: #f0f2f5;
             color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 800px;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 15px;
         }
         
+        /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--purple));
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            padding: 25px 0;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background: rgba(255,255,255,0.1);
+            color: var(--accent);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        /* Main Navigation */
+        .main-nav {
+            background: white;
+            padding: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .nav-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .nav-tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .nav-tab:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1533105079780-92b9be482077?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
             text-align: center;
-            border-radius: 0 0 25px 25px;
-            box-shadow: var(--box-shadow);
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Sports Navigation */
+        .sports-nav {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 70px;
+            z-index: 999;
+        }
+        
+        .sports-list {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+        
+        .sport-item {
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: #f5f5f5;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        
+        .sport-item.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Live Matches Section */
+        .section {
+            padding: 30px 0;
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .live-badge {
+            background: var(--live);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .match-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .match-time {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 40%;
+        }
+        
+        .team-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+        
+        .team-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .vs {
+            font-size: 14px;
+            color: #999;
+            font-weight: bold;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+        
+        .match-score {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .odds-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .odd-button {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .odd-button:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .odd-value {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .odd-type {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .odd-button:hover .odd-type {
+            color: white;
+        }
+        
+        /* Casino Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .game-image {
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
             position: relative;
             overflow: hidden;
         }
         
-        header::before {
-            content: "";
+        .game-image::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            background: rgba(0,0,0,0.2);
         }
         
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            position: relative;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        .game-info {
+            padding: 20px;
         }
         
-        .tagline {
-            font-size: 16px;
-            opacity: 0.9;
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
+        .game-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
         }
         
-        .card {
+        .game-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        /* Aviator Game Styles */
+        .aviator-game {
             background: white;
-            border-radius: var(--border-radius);
-            padding: 25px;
+            border-radius: 12px;
+            padding: 0;
             margin: 20px 0;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
         }
         
-        .card-title {
-            font-size: 22px;
-            margin-bottom: 20px;
-            color: var(--primary);
-            border-bottom: 1px solid var(--gray-light);
-            padding-bottom: 12px;
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .flight-area {
+            padding: 30px;
+            background: linear-gradient(to bottom, #87CEEB, #1E90FF);
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .flight-path {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .airplane {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            font-size: 40px;
+            transition: left 0.1s linear;
+            z-index: 10;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .multiplier-display {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            z-index: 20;
+        }
+        
+        .potential-win-display {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,204,0,0.9);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 20;
+        }
+        
+        .game-controls {
+            padding: 25px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .bet-controls {
             display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .bet-amount {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 150px;
+            text-align: center;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .bet-amount:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .auto-cashout {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .auto-cashout input {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        /* Bet Slip */
+        .bet-slip {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 20px rgba(0,0,0,0.15);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .bet-slip.open {
+            right: 0;
+        }
+        
+        .bet-slip-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
         
-        .card-title i {
-            margin-right: 10px;
+        .bet-slip-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .bet-slip-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background: #f8f9fa;
+        }
+        
+        .bet-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .bet-teams {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .bet-selection {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            padding: 4px 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .bet-odds {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .remove-bet {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .total-bet-amount {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .total-bet-amount:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .potential-win {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+            border: 1px solid #d4edda;
+        }
+        
+        /* Quick Bet */
+        .quick-bet {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s;
             font-size: 24px;
+        }
+        
+        .quick-bet:hover {
+            transform: scale(1.1);
+        }
+        
+        .quick-bet-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--live);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Live Match Updates */
+        .match-updates {
+            background: #fff8e1;
+            border-left: 4px solid var(--accent);
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .update-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .update-time {
+            color: var(--warning);
+            font-weight: bold;
+            min-width: 30px;
+        }
+        
+        /* User Profile */
+        .profile-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .balance-amount {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .payment-method {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary);
+        }
+        
+        .payment-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Auth Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            padding: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin: 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s;
+        }
+        
+        .auth-tab.active {
+            background: white;
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .auth-form {
+            display: none;
+            padding: 30px;
+        }
+        
+        .auth-form.active {
+            display: block;
         }
         
         .form-group {
             margin-bottom: 20px;
         }
         
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark);
+            font-weight: 500;
+            color: #555;
         }
         
-        input, select, textarea {
+        .form-control {
             width: 100%;
-            padding: 14px;
-            border: 1px solid var(--gray-light);
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
             border-radius: 8px;
             font-size: 16px;
-            transition: var(--transition);
-            background: white;
+            transition: border-color 0.3s;
         }
         
-        input:focus, select:focus, textarea:focus {
-            outline: none;
+        .form-control:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 95, 35, 0.1);
         }
         
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 14px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        button.secondary {
-            background: var(--secondary);
-        }
-        
-        button.secondary:hover {
-            background: var(--secondary-dark);
-        }
-        
-        button.success {
-            background: var(--success);
-        }
-        
-        button.success:hover {
-            background: var(--success-dark);
-        }
-        
-        button.purple {
-            background: var(--purple);
-        }
-        
-        button.purple:hover {
-            background: var(--purple-dark);
-        }
-        
-        button.warning {
-            background: var(--warning);
-        }
-        
-        button.warning:hover {
-            background: #e6890f;
-        }
-        
-        button:disabled {
-            background: #adb5bd;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .btn-full {
-            width: 100%;
-        }
-        
-        .btn-small {
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-        
-        .dashboard {
-            display: none;
-        }
-        
-        .balance {
-            font-size: 36px;
-            font-weight: bold;
-            text-align: center;
-            color: var(--primary);
-            margin: 20px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .timer-container {
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-        }
-        
-        .timer-progress {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 20px;
-            position: relative;
-        }
-        
-        .timer-progress-circle {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(var(--secondary) 0%, var(--gray-light) 0%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 1s linear;
-        }
-        
-        .timer {
-            font-size: 42px;
-            font-weight: bold;
-            color: var(--dark);
-        }
-        
-        .referral-code {
-            background: linear-gradient(135deg, var(--primary), var(--purple));
-            color: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .referral-code span {
-            font-weight: bold;
-            font-size: 20px;
-            display: block;
-            margin: 10px 0;
-            background: rgba(255,255,255,0.2);
-            padding: 10px;
-            border-radius: 8px;
-            letter-spacing: 1px;
-        }
-        
-        .history {
-            max-height: 300px;
-            overflow-y: auto;
-            border-radius: 8px;
-            border: 1px solid var(--gray-light);
-        }
-        
-        .history-item {
-            padding: 15px;
-            border-bottom: 1px solid var(--gray-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-        
-        .history-item:hover {
-            background: var(--gray-light);
-        }
-        
-        .history-item:last-child {
-            border-bottom: none;
-        }
-        
-        .history-item-details {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .history-item-date {
-            font-size: 12px;
-            color: var(--gray);
-            margin-top: 4px;
-        }
-        
-        .positive {
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        .negative {
-            color: var(--secondary);
-            font-weight: bold;
-        }
-        
-        .info {
-            color: var(--info);
-        }
-        
-        .purple-text {
-            color: var(--purple);
-        }
-        
-        .tab-container {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--gray-light);
-            overflow-x: auto;
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .tab {
-            padding: 12px 20px;
-            cursor: pointer;
-            border-radius: 8px;
-            white-space: nowrap;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
-        
-        .tab.active {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .alert {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 500;
-            animation: slideIn 0.5s ease;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .alert-success {
-            background: rgba(76, 201, 240, 0.15);
-            color: #0c5460;
-            border: 1px solid rgba(76, 201, 240, 0.3);
-        }
-        
-        .alert-error {
-            background: rgba(248, 37, 133, 0.15);
-            color: #721c24;
-            border: 1px solid rgba(248, 37, 133, 0.3);
-        }
-        
-        .alert-info {
-            background: rgba(72, 149, 239, 0.15);
-            color: #0c5460;
-            border: 1px solid rgba(72, 149, 239, 0.3);
-        }
-        
-        .alert-warning {
-            background: rgba(248, 150, 30, 0.15);
-            color: #856404;
-            border: 1px solid rgba(248, 150, 30, 0.3);
-        }
-        
-        .paga-facil-info {
-            background: linear-gradient(135deg, #e9f7fe, #f0f4ff);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin: 20px 0;
-            border-left: 4px solid var(--primary);
-        }
-        
-        .paga-facil-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px 0;
-        }
-        
-        .paga-facil-logo span {
+        /* Footer */
+        footer {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 50px 0 20px;
+            margin-top: 60px;
         }
         
-        .withdraw-info, .deposit-info {
-            font-size: 14px;
-            color: var(--gray);
-            margin-top: 20px;
-            background: var(--gray-light);
-            padding: 15px;
-            border-radius: 8px;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
         
-        .bonus-badge {
-            background: var(--warning);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-left: 10px;
-        }
-        
-        .primary-login-badge {
-            background: var(--purple);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: inline-block;
-            margin-left: 10px;
-        }
-        
-        .merchant-code {
-            background: linear-gradient(135deg, var(--info), var(--primary));
-            color: white;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            margin: 20px 0;
-            font-family: monospace;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .steps {
-            margin: 25px 0;
-        }
-        
-        .step {
-            display: flex;
+        .footer-column h3 {
             margin-bottom: 20px;
-            align-items: flex-start;
-        }
-        
-        .step-number {
-            background: var(--primary);
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .step-content {
-            flex: 1;
-        }
-        
-        .login-bonus {
-            background: linear-gradient(135deg, var(--purple), var(--primary));
-            color: white;
-            padding: 25px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            margin: 20px 0;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-        
-        .login-bonus h3 {
-            margin-bottom: 10px;
-            font-size: 26px;
-        }
-        
-        .login-bonus p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            border-left: 4px solid var(--primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        
-        .stat-value {
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            color: var(--gray);
-            margin-top: 8px;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 25px;
-            color: var(--gray);
-            font-size: 14px;
-            border-top: 1px solid var(--gray-light);
-        }
-        
-        .consecutive-days {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px 0;
-            gap: 10px;
-        }
-        
-        .day-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--gray-light);
-        }
-        
-        .day-indicator.active {
-            background: var(--success);
-        }
-        
-        .day-indicator.today {
-            border: 2px solid var(--success);
-            background: white;
-        }
-        
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 10px;
-            transition: var(--transition);
-        }
-        
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateX(150%);
-            transition: transform 0.5s ease;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            border-left: 4px solid var(--success);
-        }
-        
-        .notification.error {
-            border-left: 4px solid var(--secondary);
-        }
-        
-        .notification.info {
-            border-left: 4px solid var(--info);
-        }
-        
-        /* Estilos para a Máquina de Mineração */
-        .mining-machines {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .mining-machine {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mining-machine:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .mining-machine.featured {
-            border-color: var(--warning);
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-        }
-        
-        .machine-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .machine-name {
             font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--dark);
+            color: var(--accent);
         }
         
-        .machine-price {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 5px;
+        .footer-column ul {
+            list-style: none;
         }
         
-        .machine-return {
-            font-size: 16px;
-            color: var(--success);
-            margin-bottom: 10px;
-            font-weight: 600;
+        .footer-column ul li {
+            margin-bottom: 12px;
         }
         
-        .machine-profit {
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
             font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 10px;
-            background: rgba(76, 201, 240, 0.1);
-            padding: 5px 10px;
-            border-radius: 20px;
-            display: inline-block;
         }
         
-        .machine-timer {
-            font-size: 14px;
-            color: var(--warning);
-            margin-bottom: 15px;
-            font-weight: 600;
+        .footer-column ul li a:hover {
+            color: var(--accent);
         }
         
-        .machine-roi {
-            font-size: 12px;
-            color: var(--info);
-            margin-bottom: 15px;
-            background: rgba(72, 149, 239, 0.1);
-            padding: 3px 8px;
-            border-radius: 15px;
-            display: inline-block;
-        }
-        
-        .active-mining {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            border-color: var(--success);
-        }
-        
-        .mining-progress {
-            height: 6px;
-            background: var(--gray-light);
-            border-radius: 3px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-        
-        .mining-progress-bar {
-            height: 100%;
-            background: linear-gradient(135deg, var(--success), var(--info));
-            border-radius: 3px;
-            transition: width 0.3s ease;
-        }
-        
-        .mining-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .mining-stat {
-            background: white;
-            padding: 15px;
-            border-radius: var(--border-radius);
+        .copyright {
             text-align: center;
-            border-left: 4px solid var(--info);
-        }
-        
-        .mining-stat-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .mining-stat-label {
-            font-size: 12px;
-            color: var(--gray);
-            margin-top: 5px;
-        }
-        
-        .investment-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .investment-buttons button {
-            flex: 1;
-        }
-        
-        .quick-invest-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .quick-invest-btn {
-            background: var(--info);
-            padding: 10px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 14px;
+            color: #aaa;
         }
         
-        .quick-invest-btn:hover {
-            background: #3a7bd5;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
             }
             
-            .timer {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+            
+            .hero h1 {
                 font-size: 36px;
             }
             
-            .balance {
-                font-size: 30px;
+            .hero p {
+                font-size: 18px;
             }
             
-            .tab {
-                padding: 10px 15px;
-            }
-            
-            .stats-grid {
+            .matches-grid {
                 grid-template-columns: 1fr;
             }
             
-            .timer-progress {
-                width: 150px;
-                height: 150px;
+            .games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
             
-            .timer {
-                font-size: 32px;
+            .bet-slip {
+                width: 100%;
+                right: -100%;
             }
             
-            .notification {
-                right: 10px;
-                left: 10px;
-            }
-            
-            .mining-machines {
+            .game-stats {
                 grid-template-columns: 1fr;
+                gap: 10px;
             }
             
-            .mining-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .investment-buttons {
+            .bet-controls {
                 flex-direction: column;
             }
             
-            .quick-invest-buttons {
-                grid-template-columns: 1fr;
+            .quick-bet {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
             }
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .p-20 {
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Operação realizada com sucesso!</span>
-    </div>
-    
+    <!-- Header -->
     <header>
         <div class="container">
-            <div class="logo">FlyCash</div>
-            <div class="tagline">Ganhe 25MT por cadastro + 5 minutos de visualização diária</div>
+            <div class="header-content">
+                <div class="logo">
+                    Bet<span>Global</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Início</a></li>
+                        <li><a href="#" class="nav-link" data-page="sports">Desportos</a></li>
+                        <li><a href="#" class="nav-link" data-page="casino">Casino</a></li>
+                        <li><a href="#" class="nav-link" data-page="profile">Perfil</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="login-btn">Entrar</button>
+                    <button class="btn btn-primary" id="register-btn">Registrar</button>
+                </div>
+            </div>
         </div>
     </header>
-    
-    <div class="container">
-        <!-- Tela de Login/Registro -->
-        <div id="auth-screen" class="card">
-            <h2 class="card-title"><i class="fas fa-user"></i> Entrar / Registar</h2>
-            <div id="auth-alert" class="alert" style="display: none;"></div>
-            
-            <div class="form-group">
-                <label for="phone"><i class="fas fa-phone"></i> Número de Telefone</label>
-                <input type="tel" id="phone" placeholder="+258">
-            </div>
-            
-            <div class="form-group">
-                <label for="password"><i class="fas fa-lock"></i> Palavra-passe</label>
-                <input type="password" id="password" placeholder="Mínimo 6 caracteres">
-            </div>
-            
-            <div class="form-group">
-                <label for="referral-code"><i class="fas fa-user-friends"></i> Código de Referência (opcional)</label>
-                <input type="text" id="referral-code" placeholder="Código do amigo">
-            </div>
-            
-            <button id="login-btn" class="btn-full"><i class="fas fa-sign-in-alt"></i> Entrar</button>
-            <button id="register-btn" class="secondary btn-full" style="margin-top: 10px;"><i class="fas fa-user-plus"></i> Registar <span class="bonus-badge">+25MT</span></button>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-tabs">
+                <li class="nav-tab active" data-tab="home">Destaques</li>
+                <li class="nav-tab" data-tab="sports">Apostas Desportivas</li>
+                <li class="nav-tab" data-tab="casino">Casino ao Vivo</li>
+                <li class="nav-tab" data-tab="promotions">Promoções</li>
+            </ul>
         </div>
-        
-        <!-- Dashboard do Usuário -->
-        <div id="dashboard" class="dashboard">
-            <!-- Banner de Login Primária -->
-            <div id="primary-login-banner" class="login-bonus" style="display: none;">
-                <h3> Login Primária Concluído!</h3>
-                <p>Você ganhou <strong>15 MT</strong> pelo seu primeiro login do dia!</p>
-            </div>
-            
-            <div class="card">
-                <div class="balance">
-                    Saldo: <span id="user-balance">0</span> MT
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Plataforma Completa de Apostas</h1>
+            <p>Desportos em tempo real, casino ao vivo, e muito mais. Tudo em um só lugar!</p>
+            <button class="btn btn-primary" id="hero-register-btn">Comece Agora com $1000 de Bónus</button>
+        </div>
+    </section>
+
+    <!-- Main Content Sections -->
+    <main>
+        <!-- Home Section -->
+        <section id="home-section" class="section active">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Destaques do Dia</h2>
                 </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-logins">0</div>
-                        <div class="stat-label">Logins Hoje</div>
+
+                <!-- Quick Access Cards -->
+                <div class="games-grid">
+                    <div class="game-card" data-game="sports">
+                        <div class="game-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            ⚽ Apostas Desportivas
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Desportos ao Vivo</h3>
+                            <p class="game-description">Aposta nos teus desportos favoritos com odds em tempo real</p>
+                            <button class="btn btn-primary" onclick="showSection('sports')">Ver Jogos</button>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="primary-logins">0</div>
-                        <div class="stat-label">Login Primária</div>
+
+                    <div class="game-card" data-game="aviator">
+                        <div class="game-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            ✈️ Aviator
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Aviator - Spribe</h3>
+                            <p class="game-description">O jogo mais popular do momento. Retire antes do avião decolar!</p>
+                            <button class="btn btn-primary" onclick="showAviatorGame()">Jogar Agora</button>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-earned">0 MT</div>
-                        <div class="stat-label">Total Ganho</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="referral-count">0</div>
-                        <div class="stat-label">Referências</div>
+
+                    <div class="game-card" data-game="casino">
+                        <div class="game-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                            🎰 Casino Live
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Cassino ao Vivo</h3>
+                            <p class="game-description">Roleta, Blackjack, Slots e muito mais com dealers reais</p>
+                            <button class="btn btn-primary" onclick="showSection('casino')">Ver Casino</button>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="consecutive-days" id="consecutive-days">
-                    <!-- Dias consecutivos serão preenchidos dinamicamente -->
+
+                <!-- Live Matches Preview -->
+                <div class="section-header mt-20">
+                    <h2 class="section-title">
+                        Jogos ao Vivo
+                        <span class="live-badge">LIVE</span>
+                    </h2>
                 </div>
-                
-                <div class="timer-container">
-                    <h3><i class="fas fa-clock"></i> Tempo de Visualização Diário</h3>
-                    <div class="timer-progress">
-                        <div class="timer-progress-circle" id="timer-progress">
-                            <div class="timer" id="timer">05:00</div>
-                        </div>
-                    </div>
-                    <button id="start-timer" class="secondary btn-full"><i class="fas fa-play"></i> Iniciar Visualização</button>
-                    <p style="margin-top: 10px; font-size: 14px; color: var(--gray);">
-                        Complete 5 minutos e ganhe <strong>10 MT</strong> todos os dias!
-                    </p>
-                </div>
-                
-                <div class="referral-code">
-                    <i class="fas fa-share-alt"></i> Seu código de referência: 
-                    <span id="user-referral-code">CARREGANDO...</span>
-                    <button id="copy-referral-code" class="copy-btn"><i class="fas fa-copy"></i> Copiar</button>
-                    <p style="margin-top: 10px; font-size: 14px;">
-                        Compartilhe este código e ganhe <strong>25 MT</strong> por cada amigo que se registar!
-                    </p>
-                </div>
-            </div>
-            
-            <div class="tab-container">
-                <div class="tab active" data-tab="mining"><i class="fas fa-server"></i> Mineração</div>
-                <div class="tab" data-tab="deposit"><i class="fas fa-money-bill-wave"></i> Depositar</div>
-                <div class="tab" data-tab="withdraw"><i class="fas fa-wallet"></i> Levantamentos</div>
-                <div class="tab" data-tab="history"><i class="fas fa-history"></i> Histórico</div>
-                <div class="tab" data-tab="referrals"><i class="fas fa-user-friends"></i> Referências</div>
-                <div class="tab" data-tab="profile"><i class="fas fa-user"></i> Perfil</div>
-            </div>
-            
-            <!-- Aba de Mineração -->
-            <div id="mining-tab" class="tab-content active">
-                <div class="card">
-                    <h3 class="card-title"><i class="fas fa-server"></i> Máquinas de Mineração</h3>
-                    <p>Invista em máquinas de mineração e aumente seus ganhos automaticamente!</p>
-                    
-                    <div class="mining-stats">
-                        <div class="mining-stat">
-                            <div class="mining-stat-value" id="total-mining-invested">0 MT</div>
-                            <div class="mining-stat-label">Total Investido</div>
-                        </div>
-                        <div class="mining-stat">
-                            <div class="mining-stat-value" id="total-mining-profit">0 MT</div>
-                            <div class="mining-stat-label">Lucro Total</div>
-                        </div>
-                        <div class="mining-stat">
-                            <div class="mining-stat-value" id="active-machines">0</div>
-                            <div class="mining-stat-label">Máquinas Ativas</div>
-                        </div>
-                        <div class="mining-stat">
-                            <div class="mining-stat-value" id="daily-mining-income">0 MT</div>
-                            <div class="mining-stat-label">Renda Diária</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Botões de Investimento Rápido -->
-                    <div class="quick-invest-buttons">
-                        <button class="quick-invest-btn" data-amount="300">
-                            <i class="fas fa-bolt"></i> Investir 300 MT
-                        </button>
-                        <button class="quick-invest-btn" data-amount="600">
-                            <i class="fas fa-rocket"></i> Investir 600 MT
-                        </button>
-                        <button class="quick-invest-btn" data-amount="1200">
-                            <i class="fas fa-gem"></i> Investir 1200 MT
-                        </button>
-                        <button class="quick-invest-btn" data-amount="1800">
-                            <i class="fas fa-crown"></i> Investir 1800 MT
-                        </button>
-                    </div>
-                    
-                    <div class="mining-machines" id="mining-machines-container">
-                        <!-- Máquinas serão preenchidas dinamicamente -->
-                    </div>
-                    
-                    <div id="active-mining-section" style="display: none;">
-                        <h3 class="card-title" style="margin-top: 30px;"><i class="fas fa-cogs"></i> Suas Máquinas Ativas</h3>
-                        <div id="active-mining-machines">
-                            <!-- Máquinas ativas serão preenchidas dinamicamente -->
-                        </div>
-                    </div>
+
+                <div class="matches-grid" id="home-live-matches">
+                    <!-- Live matches will be populated by JavaScript -->
                 </div>
             </div>
-            
-            <!-- Aba de Depósito -->
-            <div id="deposit-tab" class="tab-content">
-                <div class="card">
-                    <h3 class="card-title"><i class="fas fa-money-bill-wave"></i> Depositar via Paga Fácil</h3>
-                    
-                    <div class="paga-facil-info">
-                        <div class="paga-facil-logo">
-                            <span>PAGA FÁCIL</span>
-                        </div>
-                        <p>Depósito rápido e seguro usando código de comerciante</p>
+        </section>
+
+        <!-- Sports Betting Section -->
+        <section id="sports-section" class="section">
+            <div class="container">
+                <!-- Sports Navigation -->
+                <div class="sports-nav">
+                    <div class="sports-list">
+                        <div class="sport-item active" data-sport="all">Todos</div>
+                        <div class="sport-item" data-sport="football">Futebol</div>
+                        <div class="sport-item" data-sport="basketball">Basquetebol</div>
+                        <div class="sport-item" data-sport="tennis">Ténis</div>
+                        <div class="sport-item" data-sport="volleyball">Voleibol</div>
+                        <div class="sport-item" data-sport="boxing">Boxe</div>
+                        <div class="sport-item" data-sport="esports">eSports</div>
                     </div>
-                    
-                    <div id="deposit-alert" class="alert" style="display: none;"></div>
-                    
-                    <div class="merchant-code">
-                        Código do Comerciante: <span id="merchant-code">1201411</span>
-                        <button id="copy-merchant-code" class="copy-btn"><i class="fas fa-copy"></i> Copiar</button>
+                </div>
+
+                <div class="section-header">
+                    <h2 class="section-title">
+                        Jogos ao Vivo
+                        <span class="live-badge">LIVE</span>
+                    </h2>
+                    <div class="live-count" id="live-count">5 jogos em direto</div>
+                </div>
+
+                <div class="matches-grid" id="sports-live-matches">
+                    <!-- Live matches will be populated by JavaScript -->
+                </div>
+
+                <div class="section-header mt-20">
+                    <h2 class="section-title">Próximos Jogos</h2>
+                </div>
+
+                <div class="matches-grid" id="sports-upcoming-matches">
+                    <!-- Upcoming matches will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Casino Section -->
+        <section id="casino-section" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Casino ao Vivo</h2>
+                </div>
+
+                <!-- Aviator Game -->
+                <div class="aviator-game">
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Saldo</div>
+                            <div class="stat-value">$<span id="aviator-balance">1000.00</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Multiplicador</div>
+                            <div class="stat-value"><span id="aviator-multiplier">1.00</span>x</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Ganho Potencial</div>
+                            <div class="stat-value">$<span id="aviator-potential">0.00</span></div>
+                        </div>
                     </div>
-                    
-                    <div class="steps">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <strong>Abra a aplicação Paga Fácil</strong>
-                                <p>No seu telemóvel, abra a aplicação Paga Fácil e faça login na sua conta.</p>
-                            </div>
+
+                    <div class="flight-area">
+                        <div class="flight-path">
+                            <div class="airplane" id="aviator-airplane">✈️</div>
+                            <div class="multiplier-display" id="aviator-multiplier-display">1.00x</div>
+                            <div class="potential-win-display" id="aviator-potential-display">Ganho: $0.00</div>
                         </div>
-                        
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <strong>Selecione "Pagar"</strong>
-                                <p>Na tela principal, selecione a opção "Pagar" ou "Pagamentos".</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <strong>Digite o código do comerciante</strong>
-                                <p>Insira o código <strong>1201411</strong> no campo destinado ao código do comerciante.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <strong>Insira o valor e confirme</strong>
-                                <p>Digite o valor que deseja depositar e confirme a transação.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step">
-                            <div class="step-number">5</div>
-                            <div class="step-content">
-                                <strong>Registre o comprovativo</strong>
-                                <p>Após o pagamento, registre o comprovativo abaixo para creditarmos o seu saldo.</p>
+                    </div>
+
+                    <div class="game-controls">
+                        <div class="bet-controls">
+                            <input type="number" id="aviator-bet-amount" class="bet-amount" value="10.00" min="1" max="1000" step="5">
+                            <button class="btn btn-primary" id="aviator-place-bet">Fazer Aposta</button>
+                            <button class="btn btn-success" id="aviator-cashout" disabled>Retirar</button>
+                            <div class="auto-cashout">
+                                <span>Auto Retirar:</span>
+                                <input type="number" id="auto-cashout-value" value="0.00" min="0" step="0.1">
+                                <span>x</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="deposit-amount"><i class="fas fa-money-bill"></i> Valor Depositado (MT)</label>
-                        <input type="number" id="deposit-amount" min="5000000" placeholder="Insira o Valor">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="transaction-id"><i class="fas fa-receipt"></i> ID da Transação Paga Fácil</label>
-                        <input type="text" id="transaction-id" placeholder="ID da transação:">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="deposit-phone"><i class="fas fa-phone"></i> Seu Número Paga Fácil</label>
-                        <input type="tel" id="deposit-phone" placeholder="Número usado no Paga Fácil">
-                    </div>
-                    
-                    <button id="confirm-deposit" class="success btn-full"><i class="fas fa-check-circle"></i> Confirmar Depósito</button>
-                    
-                    <div class="deposit-info">
-                        <p><strong>Informações importantes:</strong></p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Nome do Comerciante: AGIRA-Venda Online</li>
-                            <li>Saldo creditado em até 2 horas após confirmação</li>
-                            <li>Guarde o comprovativo da transação</li>
-                            <li>Em caso de problemas, contacte o suporte</li>
-                        </ul>
-                    </div>
                 </div>
-            </div>
-            
-            <!-- Aba de Levantamentos -->
-            <div id="withdraw-tab" class="tab-content">
-                <div class="card">
-                    <h3 class="card-title"><i class="fas fa-wallet"></i> Fazer Levantamento via Paga Fácil</h3>
-                    
-                    <div class="paga-facil-info">
-                        <div class="paga-facil-logo">
-                            <span>PAGA FÁCIL</span>
+
+                <!-- Other Casino Games -->
+                <div class="section-header mt-20">
+                    <h2 class="section-title">Outros Jogos Populares</h2>
+                </div>
+
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
+                            🎰 Slots
                         </div>
-                        <p>Transferência rápida e segura para sua conta Paga Fácil</p>
-                    </div>
-                    
-                    <div id="withdraw-alert" class="alert" style="display: none;"></div>
-                    
-                    <div class="form-group">
-                        <label for="withdraw-amount"><i class="fas fa-money-bill-wave"></i> Valor (MT)</label>
-                        <input type="number" id="withdraw-amount" min="100" placeholder="Mínimo: 100 MT">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="paga-facil-number"><i class="fas fa-phone"></i> Número Paga Fácil</label>
-                        <input type="tel" id="paga-facil-number" placeholder="Número associado ao Paga Fácil">
-                    </div>
-                    
-                    <button id="request-withdraw" class="btn-full"><i class="fas fa-paper-plane"></i> Solicitar Levantamento</button>
-                    
-                    <div class="withdraw-info">
-                        <p><strong>Informações importantes:</strong></p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Valor mínimo para levantamento: 100 MT</li>
-                            <li>Taxa de processamento: 5 MT por transação</li>
-                            <li>Processamento em até 24 horas</li>
-                            <li>Certifique-se que o número Paga Fácil está correto</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Aba de Histórico -->
-            <div id="history-tab" class="tab-content">
-                <div class="card">
-                    <h3 class="card-title"><i class="fas fa-history"></i> Histórico de Transações</h3>
-                    <div class="history" id="transaction-history">
-                        <!-- Histórico será preenchido dinamicamente -->
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Aba de Referências -->
-            <div id="referrals-tab" class="tab-content">
-                <div class="card">
-                    <h3 class="card-title"><i class="fas fa-user-friends"></i> Suas Referências</h3>
-                    <p>Ganhe 25 MT por cada pessoa que se registar com o seu código!</p>
-                    
-                    <div class="referral-code" style="margin: 20px 0;">
-                        <i class="fas fa-link"></i> Seu link de referência: <br>
-                        <span id="user-referral-link">CARREGANDO...</span>
-                        <button id="copy-referral-link" class="copy-btn"><i class="fas fa-copy"></i> Copiar</button>
-                    </div>
-                    
-                    <div class="history">
-                        <div class="history-item">
-                            <span>Total de referências</span>
-                            <span id="total-referrals">0</span>
+                        <div class="game-info">
+                            <h3 class="game-title">Slots Clássicos</h3>
+                            <p class="game-description">Máquinas caça-níqueis com jackpots progressivos</p>
+                            <button class="btn btn-primary">Jogar Agora</button>
                         </div>
-                        <div class="history-item">
-                            <span>Ganhos com referências</span>
-                            <span class="positive" id="referral-earnings">0 MT</span>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image" style="background: linear-gradient(135deg, #a1c4fd, #c2e9fb);">
+                            🎲 Roleta
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Roleta Europeia</h3>
+                            <p class="game-description">A clássica roleta com dealer ao vivo em tempo real</p>
+                            <button class="btn btn-primary">Jogar Agora</button>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-image" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">
+                            ♠️ Blackjack
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">Blackjack 21</h3>
+                            <p class="game-description">Desafie o dealer e tente chegar ao 21 sem ultrapassar</p>
+                            <button class="btn btn-primary">Jogar Agora</button>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Aba de Perfil -->
-            <div id="profile-tab" class="tab-content">
-                <div class="card">
-                    <h3 class="card-title"><i class="fas fa-user"></i> Seu Perfil</h3>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-phone"></i> Número de Telefone</label>
-                        <input type="text" id="profile-phone" readonly>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile-section" class="section">
+            <div class="container">
+                <div class="profile-card">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <h2 id="username-display">Convidado</h2>
+                    <p id="user-email">Faça login para aceder ao seu perfil</p>
+                </div>
+
+                <div class="balance-card">
+                    <p>Saldo Disponível</p>
+                    <div class="balance-amount">$ <span id="user-balance">0.00</span></div>
+                    <p>USD</p>
+                </div>
+
+                <div class="section-header">
+                    <h2 class="section-title">Métodos de Depósito</h2>
+                </div>
+
+                <div class="payment-methods">
+                    <div class="payment-method" data-method="mpesa">
+                        <div class="payment-icon">M-PESA</div>
+                        <h4>M-Pesa</h4>
+                        <p>Depósito instantâneo</p>
                     </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-calendar"></i> Data de Registro</label>
-                        <input type="text" id="profile-register-date" readonly>
+                    <div class="payment-method" data-method="pagafacil">
+                        <div class="payment-icon">PAGA FÁCIL</div>
+                        <h4>Paga Fácil</h4>
+                        <p>Pagamento fácil</p>
                     </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-chart-line"></i> Total Ganho</label>
-                        <input type="text" id="profile-total-earned" readonly>
+                    <div class="payment-method" data-method="creditcard">
+                        <div class="payment-icon">💳</div>
+                        <h4>Cartão de Crédito</h4>
+                        <p>Visa, Mastercard</p>
                     </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-money-bill"></i> Total Depositado</label>
-                        <input type="text" id="profile-total-deposited" readonly>
+                    <div class="payment-method" data-method="cryptocurrency">
+                        <div class="payment-icon">₿</div>
+                        <h4>Criptomoedas</h4>
+                        <p>Bitcoin, Ethereum</p>
                     </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-sign-in-alt"></i> Login Primária Hoje</label>
-                        <input type="text" id="profile-primary-login" readonly>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-server"></i> Máquinas de Mineração</label>
-                        <input type="text" id="profile-mining-machines" readonly>
-                    </div>
-                    
-                    <button id="logout-btn" class="secondary btn-full"><i class="fas fa-sign-out-alt"></i> Terminar Sessão</button>
+                </div>
+
+                <div class="section-header mt-20">
+                    <h2 class="section-title">Histórico de Apostas</h2>
+                </div>
+
+                <div id="betting-history">
+                    <p class="text-center">Nenhum histórico disponível</p>
                 </div>
             </div>
+        </section>
+    </main>
+
+    <!-- Bet Slip -->
+    <div class="bet-slip" id="bet-slip">
+        <div class="bet-slip-header">
+            <h3>Boletim de Apostas</h3>
+            <button class="btn btn-small btn-outline" id="close-bet-slip">✕</button>
+        </div>
+        <div class="bet-slip-content" id="bet-slip-content">
+            <div class="empty-bet-slip" id="empty-bet-slip">
+                <p>Nenhuma aposta no boletim</p>
+                <p style="font-size: 12px; color: #666;">Selecione odds dos jogos para adicionar apostas</p>
+            </div>
+        </div>
+        <div class="bet-slip-footer">
+            <input type="number" class="total-bet-amount" id="total-bet-amount" placeholder="Valor da aposta ($)" min="1" step="0.5">
+            <div class="potential-win" id="potential-win">
+                Ganho Potencial: $0.00
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" id="place-bet-btn" disabled>Fazer Aposta</button>
         </div>
     </div>
-    
+
+    <!-- Quick Bet Button -->
+    <div class="quick-bet" id="quick-bet">
+        <div class="quick-bet-badge" id="bet-count">0</div>
+        🎯
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Acesso à Conta</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Entrar</div>
+                <div class="auth-tab" data-tab="register">Registrar</div>
+            </div>
+            
+            <form id="login-form" class="auth-form active">
+                <div class="form-group">
+                    <label for="login-email">E-mail ou Nome de Usuário</label>
+                    <input type="text" id="login-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+                </div>
+            </form>
+            
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="register-username">Nome de Usuário</label>
+                    <input type="text" id="register-username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">E-mail</label>
+                    <input type="email" id="register-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Senha</label>
+                    <input type="password" id="register-password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-country">País</label>
+                    <select id="register-country" class="form-control" required>
+                        <option value="">Selecione seu país</option>
+                        <option value="brasil">Brasil</option>
+                        <option value="portugal">Portugal</option>
+                        <option value="angola">Angola</option>
+                        <option value="mocambique">Moçambique</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="register-currency">Moeda</label>
+                    <select id="register-currency" class="form-control" required>
+                        <option value="USD">Dólar Americano (USD)</option>
+                        <option value="BRL">Real Brasileiro (BRL)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Criar Conta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>Flycash &copy; 2025 - Ganhe 25MT por cadastro + 5 minutos de visualização diária</p>
-            <p style="margin-top: 10px; font-size: 12px;"> <h3>Atendimento ao Cliente</h3>
-            cashfly26@gmail.com
-            </p>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BetGlobal</h3>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                        <li><a href="#">Responsabilidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Jogos</h3>
+                    <ul>
+                        <li><a href="#">Cassino ao Vivo</a></li>
+                        <li><a href="#">Slots</a></li>
+                        <li><a href="#">Aviator</a></li>
+                        <li><a href="#">Roleta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Suporte</h3>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Contate-nos</a></li>
+                        <li><a href="#">Regras do Jogo</a></li>
+                        <li><a href="#">Proteção de Jogadores</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Jurídico</h3>
+                    <ul>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Jogo Responsável</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 BetGlobal. Todos os direitos reservados. Jogue com responsabilidade.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Variáveis globais
-        let currentUser = null;
-        let timerInterval = null;
-        let timeLeft = 300; // 5 minutos em segundos
-        let timerRunning = false;
-        let miningInterval = null;
-        
-        // Configurações das máquinas de mineração
-        const miningMachines = [
-            {
-                id: 1,
-                name: "Miner Básico",
-                price: 300,
-                return: 450,
-                duration: 360, // horas
-                profit: "+150 MT",
-                roi: "50% ROI",
-                icon: "fas fa-microchip",
-                featured: false,
-                description: "Ideal para iniciantes"
-            },
-            {
-                id: 2,
-                name: "Miner Intermédio",
-                price: 600,
-                return: 1220,
-                duration: 774,
-                profit: "+620 MT",
-                roi: "103% ROI",
-                icon: "fas fa-server",
-                featured: true,
-                description: "Melhor custo-benefício"
-            },
-            {
-                id: 3,
-                name: "Miner Avançado",
-                price: 1200,
-                return: 2285,
-                duration: 774,
-                profit: "+1085 MT",
-                roi: "90% ROI",
-                icon: "fas fa-network-wired",
-                featured: false,
-                description: "Alta performance"
-            },
-            {
-                id: 4,
-                name: "Miner Profissional",
-                price: 1800,
-                return: 3505,
-                duration: 774,
-                profit: "+1705 MT",
-                roi: "95% ROI",
-                icon: "fas fa-hdd",
-                featured: false,
-                description: "Para investidores"
-            },
-            {
-                id: 5,
-                name: "Miner Master",
-                price: 2300,
-                return: 4470,
-                duration: 774,
-                profit: "+2170 MT",
-                roi: "94% ROI",
-                icon: "fas fa-database",
-                featured: false,
-                description: "Máximo retorno"
+        // ==============================
+        // ESTADO DA APLICAÇÃO
+        // ==============================
+        const AppState = {
+            currentUser: null,
+            userBalance: 0,
+            betSlip: [],
+            currentSection: 'home',
+            currentSport: 'all',
+            aviatorGame: {
+                isPlaying: false,
+                multiplier: 1.0,
+                betAmount: 0,
+                cashoutMultiplier: 0,
+                autoCashout: 0,
+                flightInterval: null,
+                airplanePosition: 0,
+                crashPoint: 0
             }
-        ];
-        
-        // Elementos DOM
-        const authScreen = document.getElementById('auth-screen');
-        const dashboard = document.getElementById('dashboard');
-        const authAlert = document.getElementById('auth-alert');
-        const withdrawAlert = document.getElementById('withdraw-alert');
-        const depositAlert = document.getElementById('deposit-alert');
-        const primaryLoginBanner = document.getElementById('primary-login-banner');
-        const userBalance = document.getElementById('user-balance');
-        const timerDisplay = document.getElementById('timer');
-        const timerProgress = document.getElementById('timer-progress');
-        const startTimerBtn = document.getElementById('start-timer');
-        const userReferralCode = document.getElementById('user-referral-code');
-        const userReferralLink = document.getElementById('user-referral-link');
-        const totalReferrals = document.getElementById('total-referrals');
-        const referralEarnings = document.getElementById('referral-earnings');
-        const withdrawAmount = document.getElementById('withdraw-amount');
-        const pagaFacilNumber = document.getElementById('paga-facil-number');
-        const depositAmount = document.getElementById('deposit-amount');
-        const transactionId = document.getElementById('transaction-id');
-        const depositPhone = document.getElementById('deposit-phone');
-        const transactionHistory = document.getElementById('transaction-history');
-        const profilePhone = document.getElementById('profile-phone');
-        const profileRegisterDate = document.getElementById('profile-register-date');
-        const profileTotalEarned = document.getElementById('profile-total-earned');
-        const profileTotalDeposited = document.getElementById('profile-total-deposited');
-        const profilePrimaryLogin = document.getElementById('profile-primary-login');
-        const profileMiningMachines = document.getElementById('profile-mining-machines');
-        const totalLogins = document.getElementById('total-logins');
-        const primaryLogins = document.getElementById('primary-logins');
-        const totalEarned = document.getElementById('total-earned');
-        const referralCount = document.getElementById('referral-count');
-        const consecutiveDaysContainer = document.getElementById('consecutive-days');
-        const notification = document.getElementById('notification');
-        const notificationText = document.getElementById('notification-text');
-        const miningMachinesContainer = document.getElementById('mining-machines-container');
-        const activeMiningSection = document.getElementById('active-mining-section');
-        const activeMiningMachines = document.getElementById('active-mining-machines');
-        const totalMiningInvested = document.getElementById('total-mining-invested');
-        const totalMiningProfit = document.getElementById('total-mining-profit');
-        const activeMachines = document.getElementById('active-machines');
-        const dailyMiningIncome = document.getElementById('daily-mining-income');
-        
-        // Inicialização
+        };
+
+        // ==============================
+        // DADOS DE EXEMPLO
+        // ==============================
+        const SportsData = {
+            liveMatches: [
+                {
+                    id: 1,
+                    sport: 'football',
+                    league: 'Liga Portuguesa',
+                    teamA: 'Benfica',
+                    teamB: 'Porto',
+                    scoreA: 1,
+                    scoreB: 0,
+                    time: '62\'',
+                    odds: { home: 2.10, draw: 3.25, away: 3.50 },
+                    live: true,
+                    updates: [
+                        { time: '15\'', event: '⚽ Golo! Benfica marca' },
+                        { time: '45\'', event: '🟨 Cartão amarelo para Porto' }
+                    ]
+                },
+                {
+                    id: 2,
+                    sport: 'basketball',
+                    league: 'NBA',
+                    teamA: 'Lakers',
+                    teamB: 'Warriors',
+                    scoreA: 85,
+                    scoreB: 82,
+                    time: 'Q3 - 08:15',
+                    odds: { home: 1.85, away: 2.05 },
+                    live: true,
+                    updates: [
+                        { time: 'Q2', event: '🏀 Lakers na liderança' }
+                    ]
+                },
+                {
+                    id: 3,
+                    sport: 'tennis',
+                    league: 'Wimbledon',
+                    teamA: 'Nadal',
+                    teamB: 'Djokovic',
+                    scoreA: '2-1',
+                    scoreB: '6-4, 3-6, 5-4',
+                    time: '4º Set',
+                    odds: { home: 2.30, away: 1.65 },
+                    live: true
+                }
+            ],
+            upcomingMatches: [
+                {
+                    id: 4,
+                    sport: 'football',
+                    league: 'Premier League',
+                    teamA: 'Manchester United',
+                    teamB: 'Liverpool',
+                    time: 'Hoje 20:00',
+                    odds: { home: 2.80, draw: 3.40, away: 2.45 }
+                },
+                {
+                    id: 5,
+                    sport: 'football',
+                    league: 'La Liga',
+                    teamA: 'Barcelona',
+                    teamB: 'Real Madrid',
+                    time: 'Amanhã 21:00',
+                    odds: { home: 2.15, draw: 3.60, away: 3.20 }
+                },
+                {
+                    id: 6,
+                    sport: 'esports',
+                    league: 'CS:GO Major',
+                    teamA: 'NaVi',
+                    teamB: 'FaZe',
+                    time: 'Hoje 22:00',
+                    odds: { home: 1.75, away: 2.10 }
+                }
+            ]
+        };
+
+        // ==============================
+        // INICIALIZAÇÃO
+        // ==============================
         document.addEventListener('DOMContentLoaded', function() {
-            // Verificar se o usuário já está logado
-            checkLoginStatus();
-            
-            // Event Listeners
-            document.getElementById('login-btn').addEventListener('click', login);
-            document.getElementById('register-btn').addEventListener('click', register);
-            document.getElementById('request-withdraw').addEventListener('click', requestWithdraw);
-            document.getElementById('confirm-deposit').addEventListener('click', confirmDeposit);
-            document.getElementById('logout-btn').addEventListener('click', logout);
-            startTimerBtn.addEventListener('click', toggleTimer);
-            
-            // Botões de cópia
-            document.getElementById('copy-referral-code').addEventListener('click', function() {
-                copyToClipboard(userReferralCode.textContent);
-                showNotification('Código de referência copiado!', 'success');
-            });
-            
-            document.getElementById('copy-referral-link').addEventListener('click', function() {
-                copyToClipboard(userReferralLink.textContent);
-                showNotification('Link de referência copiado!', 'success');
-            });
-            
-            document.getElementById('copy-merchant-code').addEventListener('click', function() {
-                copyToClipboard(document.getElementById('merchant-code').textContent);
-                showNotification('Código do comerciante copiado!', 'success');
-            });
-            
-            // Botões de investimento rápido
-            document.querySelectorAll('.quick-invest-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const amount = parseInt(this.getAttribute('data-amount'));
-                    quickInvest(amount);
-                });
-            });
-            
-            // Verificar código de referência na URL
-            checkUrlReferral();
-            
-            // Tabs
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Remover classe active de todas as tabs
-                    tabs.forEach(t => t.classList.remove('active'));
-                    // Adicionar classe active à tab clicada
-                    this.classList.add('active');
-                    
-                    // Esconder todos os conteúdos
-                    const tabContents = document.querySelectorAll('.tab-content');
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    // Mostrar o conteúdo correspondente
-                    const tabId = this.getAttribute('data-tab') + '-tab';
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
-            
-            // Iniciar verificação de mineração
-            startMiningCheck();
+            initializeApp();
+            setupEventListeners();
+            renderHomeContent();
+            startLiveUpdates();
         });
-        
-        // Verificar status de login
-        function checkLoginStatus() {
+
+        function initializeApp() {
+            // Verificar se há usuário salvo
             const savedUser = localStorage.getItem('currentUser');
             if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                showDashboard();
+                AppState.currentUser = JSON.parse(savedUser);
+                AppState.userBalance = parseFloat(localStorage.getItem('userBalance')) || 1000;
+                updateUserInterface();
             }
+
+            // Inicializar jogo Aviator
+            initializeAviatorGame();
         }
-        
-        // Verificar código de referência na URL
-        function checkUrlReferral() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const refCode = urlParams.get('ref');
-            if (refCode) {
-                document.getElementById('referral-code').value = refCode;
-            }
+
+        // ==============================
+        // RENDERIZAÇÃO DE CONTEÚDO
+        // ==============================
+        function renderHomeContent() {
+            renderLiveMatches('home-live-matches', SportsData.liveMatches.slice(0, 2));
         }
-        
-        // Função de login
-        function login() {
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
+
+        function renderSportsContent() {
+            const filteredLive = AppState.currentSport === 'all' 
+                ? SportsData.liveMatches 
+                : SportsData.liveMatches.filter(match => match.sport === AppState.currentSport);
             
-            if (!phone || !password) {
-                showAlert(authAlert, 'Por favor, preencha todos os campos.', 'error');
+            const filteredUpcoming = AppState.currentSport === 'all'
+                ? SportsData.upcomingMatches
+                : SportsData.upcomingMatches.filter(match => match.sport === AppState.currentSport);
+
+            renderLiveMatches('sports-live-matches', filteredLive);
+            renderUpcomingMatches('sports-upcoming-matches', filteredUpcoming);
+            updateLiveCount();
+        }
+
+        function renderLiveMatches(containerId, matches) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = matches.map(match => `
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-league">${match.league}</div>
+                        <div class="match-time">
+                            ${match.live ? `<span class="live-badge">LIVE</span> ${match.time}` : match.time}
+                        </div>
+                    </div>
+                    
+                    <div class="match-teams">
+                        <div class="team">
+                            <div class="team-logo">${match.teamA.substring(0, 2)}</div>
+                            <div class="team-name">${match.teamA}</div>
+                        </div>
+                        
+                        <div class="vs">VS</div>
+                        
+                        <div class="team">
+                            <div class="team-logo">${match.teamB.substring(0, 2)}</div>
+                            <div class="team-name">${match.teamB}</div>
+                        </div>
+                    </div>
+                    
+                    ${match.scoreA !== undefined ? `
+                        <div class="match-score">
+                            <span>${match.scoreA}</span>
+                            <span>-</span>
+                            <span>${match.scoreB}</span>
+                        </div>
+                    ` : ''}
+                    
+                    ${match.updates ? `
+                        <div class="match-updates">
+                            ${match.updates.map(update => `
+                                <div class="update-item">
+                                    <span class="update-time">${update.time}</span>
+                                    <span>${update.event}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="odds-container">
+                        ${match.odds.home ? `
+                            <div class="odd-button" data-match="${match.id}" data-selection="home" data-odds="${match.odds.home}">
+                                <div class="odd-value">${match.odds.home}</div>
+                                <div class="odd-type">${match.teamA}</div>
+                            </div>
+                        ` : ''}
+                        
+                        ${match.odds.draw ? `
+                            <div class="odd-button" data-match="${match.id}" data-selection="draw" data-odds="${match.odds.draw}">
+                                <div class="odd-value">${match.odds.draw}</div>
+                                <div class="odd-type">Empate</div>
+                            </div>
+                        ` : ''}
+                        
+                        ${match.odds.away ? `
+                            <div class="odd-button" data-match="${match.id}" data-selection="away" data-odds="${match.odds.away}">
+                                <div class="odd-value">${match.odds.away}</div>
+                                <div class="odd-type">${match.teamB}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            // Re-attach event listeners
+            attachOddButtonListeners();
+        }
+
+        function renderUpcomingMatches(containerId, matches) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = matches.map(match => `
+                <div class="match-card">
+                    <div class="match-header">
+                        <div class="match-league">${match.league}</div>
+                        <div class="match-time">${match.time}</div>
+                    </div>
+                    
+                    <div class="match-teams">
+                        <div class="team">
+                            <div class="team-logo">${match.teamA.substring(0, 2)}</div>
+                            <div class="team-name">${match.teamA}</div>
+                        </div>
+                        
+                        <div class="vs">VS</div>
+                        
+                        <div class="team">
+                            <div class="team-logo">${match.teamB.substring(0, 2)}</div>
+                            <div class="team-name">${match.teamB}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="odds-container">
+                        ${match.odds.home ? `
+                            <div class="odd-button" data-match="${match.id}" data-selection="home" data-odds="${match.odds.home}">
+                                <div class="odd-value">${match.odds.home}</div>
+                                <div class="odd-type">${match.teamA}</div>
+                            </div>
+                        ` : ''}
+                        
+                        ${match.odds.draw ? `
+                            <div class="odd-button" data-match="${match.id}" data-selection="draw" data-odds="${match.odds.draw}">
+                                <div class="odd-value">${match.odds.draw}</div>
+                                <div class="odd-type">Empate</div>
+                            </div>
+                        ` : ''}
+                        
+                        ${match.odds.away ? `
+                            <div class="odd-button" data-match="${match.id}" data-selection="away" data-odds="${match.odds.away}">
+                                <div class="odd-value">${match.odds.away}</div>
+                                <div class="odd-type">${match.teamB}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            attachOddButtonListeners();
+        }
+
+        // ==============================
+        // SISTEMA DE APOSTAS
+        // ==============================
+        function addToBetSlip(matchId, selection, odds, teams, selectionName) {
+            if (!AppState.currentUser) {
+                showAuthModal();
                 return;
             }
-            
-            // Verificar se o usuário existe
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const user = users.find(u => u.phone === phone && u.password === password);
-            
-            if (user) {
-                currentUser = user;
-                
-                // Verificar login primária
-                checkPrimaryLogin();
-                
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                showDashboard();
-                showNotification('Login realizado com sucesso!', 'success');
-            } else {
-                showAlert(authAlert, 'Número de telefone ou palavra-passe incorretos.', 'error');
-            }
-        }
-        
-        // Verificar e processar login primária
-        function checkPrimaryLogin() {
-            const today = new Date().toDateString();
-            const lastLoginDate = localStorage.getItem(`lastLogin_${currentUser.phone}`);
-            
-            // Se não fez login hoje, é login primária
-            if (lastLoginDate !== today) {
-                // Primeiro login do dia - dar bônus
-                const primaryLoginBonus = 15; // 15 MT pelo primeiro login
-                currentUser.balance += primaryLoginBonus;
-                currentUser.transactions.push({
-                    type: 'primary_login',
-                    amount: primaryLoginBonus,
-                    description: 'Bónus de Login Primária',
-                    date: new Date().toISOString()
-                });
-                
-                // Atualizar estatísticas
-                if (!currentUser.loginStats) {
-                    currentUser.loginStats = {
-                        totalLogins: 0,
-                        primaryLogins: 0,
-                        consecutiveDays: 0
-                    };
-                }
-                
-                currentUser.loginStats.totalLogins++;
-                currentUser.loginStats.primaryLogins++;
-                
-                // Verificar dias consecutivos
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1);
-                const yesterdayString = yesterday.toDateString();
-                
-                if (lastLoginDate === yesterdayString) {
-                    currentUser.loginStats.consecutiveDays++;
-                } else {
-                    currentUser.loginStats.consecutiveDays = 1;
-                }
-                
-                // Mostrar banner de login primária
-                primaryLoginBanner.style.display = 'block';
-                
-                // Atualizar último login
-                localStorage.setItem(`lastLogin_${currentUser.phone}`, today);
-                
-                // Atualizar usuário no localStorage
-                updateUserInStorage();
-                
-                showNotification(`Login primária! Ganhou ${primaryLoginBonus} MT de bónus.`, 'success');
-            } else {
-                // Já fez login hoje, apenas atualizar contador
-                if (currentUser.loginStats) {
-                    currentUser.loginStats.totalLogins++;
-                }
-                primaryLoginBanner.style.display = 'none';
-            }
-        }
-        
-        // Função de registro
-        function register() {
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            const referralCode = document.getElementById('referral-code').value;
-            
-            if (!phone || !password) {
-                showAlert(authAlert, 'Por favor, preencha todos os campos obrigatórios.', 'error');
-                return;
-            }
-            
-            if (password.length < 6) {
-                showAlert(authAlert, 'A palavra-passe deve ter pelo menos 6 caracteres.', 'error');
-                return;
-            }
-            
-            // Verificar se o usuário já existe
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            if (users.find(u => u.phone === phone)) {
-                showAlert(authAlert, 'Este número de telefone já está registado.', 'error');
-                return;
-            }
-            
-            // Criar novo usuário
-            const newUser = {
-                phone: phone,
-                password: password,
-                balance: 25, // 25 MT de bónus de registro
-                referralCode: generateReferralCode(),
-                referredBy: referralCode || null,
-                referrals: [],
-                transactions: [
-                    {
-                        type: 'bonus',
-                        amount: 25,
-                        description: 'Bónus de registro',
-                        date: new Date().toISOString()
-                    }
-                ],
-                registerDate: new Date().toISOString(),
-                dailyTimerUsed: false,
-                totalDeposited: 0,
-                miningMachines: [],
-                loginStats: {
-                    totalLogins: 1,
-                    primaryLogins: 1,
-                    consecutiveDays: 1
-                }
-            };
-            
-            users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
-            
-            // Se foi usado um código de referência, adicionar bónus ao referenciador
-            if (referralCode) {
-                const referrer = users.find(u => u.referralCode === referralCode);
-                if (referrer) {
-                    referrer.balance += 25;
-                    referrer.transactions.push({
-                        type: 'referral',
-                        amount: 25,
-                        description: `Bónus de referência: ${phone}`,
-                        date: new Date().toISOString()
-                    });
-                    referrer.referrals.push(phone);
-                    localStorage.setItem('users', JSON.stringify(users));
-                }
-            }
-            
-            currentUser = newUser;
-            
-            // Registrar primeiro login
-            const today = new Date().toDateString();
-            localStorage.setItem(`lastLogin_${currentUser.phone}`, today);
-            
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            showDashboard();
-            
-            // Mostrar banner de login primária para novo usuário
-            primaryLoginBanner.style.display = 'block';
-            
-            showNotification('Registro realizado com sucesso! Ganhou 25 MT de bónus + 15 MT de login primária.', 'success');
-        }
-        
-        // Mostrar dashboard
-        function showDashboard() {
-            authScreen.style.display = 'none';
-            dashboard.style.display = 'block';
-            
-            // Atualizar informações do usuário
-            updateUserInfo();
-            
-            // Atualizar máquinas de mineração
-            updateMiningMachines();
-            updateActiveMiningMachines();
-        }
-        
-        // Atualizar informações do usuário
-        function updateUserInfo() {
-            if (!currentUser) return;
-            
-            userBalance.textContent = currentUser.balance;
-            userReferralCode.textContent = currentUser.referralCode;
-            userReferralLink.textContent = window.location.href.split('?')[0] + '?ref=' + currentUser.referralCode;
-            
-            // Atualizar estatísticas de referências
-            totalReferrals.textContent = currentUser.referrals.length;
-            const referralTotal = currentUser.transactions
-                .filter(t => t.type === 'referral')
-                .reduce((sum, t) => sum + t.amount, 0);
-            referralEarnings.textContent = referralTotal + ' MT';
-            
-            // Atualizar estatísticas de login
-            if (currentUser.loginStats) {
-                totalLogins.textContent = currentUser.loginStats.totalLogins;
-                primaryLogins.textContent = currentUser.loginStats.primaryLogins;
-            }
-            
-            // Atualizar histórico
-            updateTransactionHistory();
-            
-            // Atualizar perfil
-            updateProfile();
-            
-            // Atualizar indicador de dias consecutivos
-            updateConsecutiveDays();
-            
-            // Verificar se o timer diário já foi usado hoje
-            const today = new Date().toDateString();
-            const lastTimerUse = localStorage.getItem(`timerUsed_${currentUser.phone}`);
-            if (lastTimerUse === today) {
-                startTimerBtn.disabled = true;
-                startTimerBtn.textContent = 'Minutos Diário Já Utilizado';
-                timerDisplay.textContent = '00:00';
-                timerProgress.style.background = 'conic-gradient(var(--secondary) 100%, var(--gray-light) 0%)';
-            } else {
-                startTimerBtn.disabled = false;
-                startTimerBtn.textContent = 'Iniciar Visualização';
-                timerDisplay.textContent = '05:00';
-                timeLeft = 300;
-                timerProgress.style.background = 'conic-gradient(var(--secondary) 0%, var(--gray-light) 0%)';
-            }
-        }
-        
-        // Atualizar indicador de dias consecutivos
-        function updateConsecutiveDays() {
-            if (!currentUser.loginStats) return;
-            
-            consecutiveDaysContainer.innerHTML = '';
-            const consecutiveDays = currentUser.loginStats.consecutiveDays || 0;
-            
-            // Criar indicadores para os últimos 7 dias
-            for (let i = 6; i >= 0; i--) {
-                const dayIndicator = document.createElement('div');
-                dayIndicator.className = 'day-indicator';
-                
-                // Verificar se é um dia com login
-                if (i < consecutiveDays) {
-                    dayIndicator.classList.add('active');
-                }
-                
-                // Marcar o dia atual
-                if (i === 0) {
-                    dayIndicator.classList.add('today');
-                }
-                
-                consecutiveDaysContainer.appendChild(dayIndicator);
-            }
-            
-            // Adicionar texto informativo
-            const infoText = document.createElement('div');
-            infoText.textContent = `${consecutiveDays} dias consecutivos`;
-            infoText.style.fontSize = '14px';
-            infoText.style.color = 'var(--gray)';
-            infoText.style.marginTop = '10px';
-            consecutiveDaysContainer.appendChild(infoText);
-        }
-        
-        // Atualizar histórico de transações
-        function updateTransactionHistory() {
-            transactionHistory.innerHTML = '';
-            
-            if (currentUser.transactions.length === 0) {
-                transactionHistory.innerHTML = '<div class="history-item">Nenhuma transação encontrada</div>';
-                return;
-            }
-            
-            // Ordenar transações por data (mais recente primeiro)
-            const sortedTransactions = [...currentUser.transactions].sort((a, b) => 
-                new Date(b.date) - new Date(a.date)
+
+            const existingBet = AppState.betSlip.find(bet => 
+                bet.matchId === matchId && bet.selection === selection
             );
             
-            sortedTransactions.forEach(transaction => {
-                const item = document.createElement('div');
-                item.className = 'history-item';
+            if (existingBet) {
+                showNotification('Esta seleção já está no seu boletim!', 'warning');
+                return;
+            }
+            
+            const match = [...SportsData.liveMatches, ...SportsData.upcomingMatches].find(m => m.id === matchId);
+            
+            AppState.betSlip.push({
+                matchId,
+                selection,
+                odds: parseFloat(odds),
+                teams: `${match.teamA} vs ${match.teamB}`,
+                selectionName,
+                timestamp: new Date()
+            });
+            
+            updateBetSlip();
+            updateBetCount();
+            openBetSlip();
+            showNotification('Aposta adicionada ao boletim!', 'success');
+        }
+
+        function updateBetSlip() {
+            const betSlipContent = document.getElementById('bet-slip-content');
+            const emptyBetSlip = document.getElementById('empty-bet-slip');
+            
+            if (AppState.betSlip.length === 0) {
+                emptyBetSlip.style.display = 'block';
+                betSlipContent.innerHTML = '';
+                betSlipContent.appendChild(emptyBetSlip);
+                return;
+            }
+            
+            emptyBetSlip.style.display = 'none';
+            
+            betSlipContent.innerHTML = AppState.betSlip.map((bet, index) => `
+                <div class="bet-item">
+                    <button class="remove-bet" onclick="removeFromBetSlip(${index})">×</button>
+                    <div class="bet-teams">${bet.teams}</div>
+                    <div class="bet-selection">${bet.selectionName}</div>
+                    <div class="bet-odds">Odds: ${bet.odds}</div>
+                </div>
+            `).join('');
+            
+            calculatePotentialWin();
+        }
+
+        function removeFromBetSlip(index) {
+            AppState.betSlip.splice(index, 1);
+            updateBetSlip();
+            updateBetCount();
+        }
+
+        function calculatePotentialWin() {
+            const betAmount = parseFloat(document.getElementById('total-bet-amount').value) || 0;
+            
+            if (betAmount <= 0 || AppState.betSlip.length === 0) {
+                document.getElementById('potential-win').textContent = 'Ganho Potencial: $0.00';
+                document.getElementById('place-bet-btn').disabled = true;
+                return;
+            }
+            
+            let totalOdds = 1;
+            AppState.betSlip.forEach(bet => {
+                totalOdds *= bet.odds;
+            });
+            
+            const potentialWin = betAmount * totalOdds;
+            document.getElementById('potential-win').textContent = `Ganho Potencial: $${potentialWin.toFixed(2)}`;
+            document.getElementById('place-bet-btn').disabled = false;
+        }
+
+        function placeBet() {
+            if (!AppState.currentUser) {
+                showNotification('Por favor, faça login para apostar!', 'error');
+                showAuthModal();
+                return;
+            }
+            
+            const betAmount = parseFloat(document.getElementById('total-bet-amount').value);
+            
+            if (betAmount <= 0) {
+                showNotification('Por favor, insira um valor válido para a aposta.', 'error');
+                return;
+            }
+            
+            if (betAmount > AppState.userBalance) {
+                showNotification('Saldo insuficiente para fazer esta aposta.', 'error');
+                return;
+            }
+            
+            if (AppState.betSlip.length === 0) {
+                showNotification('Por favor, adicione seleções ao seu boletim.', 'error');
+                return;
+            }
+            
+            // Processar aposta
+            AppState.userBalance -= betAmount;
+            updateUserBalance();
+            
+            const totalOdds = AppState.betSlip.reduce((acc, bet) => acc * bet.odds, 1);
+            const potentialWin = betAmount * totalOdds;
+            
+            showNotification(`Aposta realizada com sucesso! Valor: $${betAmount} | Ganho Potencial: $${potentialWin.toFixed(2)}`, 'success');
+            
+            // Limpar boletim
+            AppState.betSlip = [];
+            updateBetSlip();
+            updateBetCount();
+            document.getElementById('total-bet-amount').value = '';
+            calculatePotentialWin();
+            closeBetSlip();
+        }
+
+        // ==============================
+        // JOGO AVIATOR
+        // ==============================
+        function initializeAviatorGame() {
+            // Gerar ponto de crash aleatório
+            AppState.aviatorGame.crashPoint = Math.random() * 10 + 1;
+        }
+
+        function startAviatorGame() {
+            if (AppState.aviatorGame.isPlaying) {
+                showNotification('Já existe um jogo em andamento!', 'warning');
+                return;
+            }
+
+            const betAmount = parseFloat(document.getElementById('aviator-bet-amount').value);
+            
+            if (isNaN(betAmount) || betAmount <= 0) {
+                showNotification('Por favor, insira um valor de aposta válido.', 'error');
+                return;
+            }
+            
+            if (betAmount > AppState.userBalance) {
+                showNotification('Saldo insuficiente para esta aposta.', 'error');
+                return;
+            }
+
+            AppState.aviatorGame.isPlaying = true;
+            AppState.aviatorGame.betAmount = betAmount;
+            AppState.aviatorGame.multiplier = 1.0;
+            AppState.aviatorGame.cashoutMultiplier = 0;
+            AppState.aviatorGame.airplanePosition = 0;
+
+            // Deduzir valor da aposta
+            AppState.userBalance -= betAmount;
+            updateUserBalance();
+
+            // Ativar botão de retirada
+            document.getElementById('aviator-cashout').disabled = false;
+
+            // Iniciar animação
+            const airplane = document.getElementById('aviator-airplane');
+            const multiplierDisplay = document.getElementById('aviator-multiplier-display');
+            const potentialDisplay = document.getElementById('aviator-potential-display');
+
+            AppState.aviatorGame.flightInterval = setInterval(() => {
+                if (!AppState.aviatorGame.isPlaying) return;
+
+                // Aumentar multiplicador
+                AppState.aviatorGame.multiplier += 0.01;
+                AppState.aviatorGame.airplanePosition += 1;
+
+                // Atualizar displays
+                multiplierDisplay.textContent = AppState.aviatorGame.multiplier.toFixed(2) + 'x';
+                potentialDisplay.textContent = `Ganho: $${(AppState.aviatorGame.betAmount * AppState.aviatorGame.multiplier).toFixed(2)}`;
                 
-                const details = document.createElement('div');
-                details.className = 'history-item-details';
-                
-                const description = document.createElement('span');
-                description.textContent = transaction.description;
-                
-                const date = document.createElement('span');
-                date.className = 'history-item-date';
-                date.textContent = new Date(transaction.date).toLocaleDateString('pt-PT', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                
-                details.appendChild(description);
-                details.appendChild(date);
-                
-                const amount = document.createElement('span');
-                
-                if (transaction.type === 'withdraw') {
-                    amount.textContent = '-' + transaction.amount + ' MT';
-                    amount.className = 'negative';
-                } else if (transaction.type === 'deposit') {
-                    amount.textContent = '+' + transaction.amount + ' MT';
-                    amount.className = 'info';
-                } else if (transaction.type === 'primary_login') {
-                    amount.textContent = '+' + transaction.amount + ' MT';
-                    amount.className = 'purple-text';
-                } else if (transaction.type === 'mining') {
-                    amount.textContent = '+' + transaction.amount + ' MT';
-                    amount.className = 'positive';
-                } else {
-                    amount.textContent = '+' + transaction.amount + ' MT';
-                    amount.className = 'positive';
+                // Mover avião
+                airplane.style.left = `${AppState.aviatorGame.airplanePosition}%`;
+
+                // Atualizar stats
+                document.getElementById('aviator-multiplier').textContent = AppState.aviatorGame.multiplier.toFixed(2);
+                document.getElementById('aviator-potential').textContent = (AppState.aviatorGame.betAmount * AppState.aviatorGame.multiplier).toFixed(2);
+
+                // Verificar auto cashout
+                const autoCashoutValue = parseFloat(document.getElementById('auto-cashout-value').value);
+                if (autoCashoutValue > 0 && AppState.aviatorGame.multiplier >= autoCashoutValue) {
+                    aviatorCashout();
+                    return;
                 }
-                
-                item.appendChild(details);
-                item.appendChild(amount);
-                transactionHistory.appendChild(item);
-            });
-        }
-        
-        // Atualizar perfil
-        function updateProfile() {
-            profilePhone.value = currentUser.phone;
-            
-            const registerDate = new Date(currentUser.registerDate);
-            profileRegisterDate.value = registerDate.toLocaleDateString('pt-PT');
-            
-            const totalEarnedValue = currentUser.transactions
-                .filter(t => t.type !== 'withdraw' && t.type !== 'deposit')
-                .reduce((sum, t) => sum + t.amount, 0);
-            profileTotalEarned.value = totalEarnedValue + ' MT';
-            totalEarned.textContent = totalEarnedValue + ' MT';
-            
-            profileTotalDeposited.value = currentUser.totalDeposited + ' MT';
-            
-            if (currentUser.loginStats) {
-                profilePrimaryLogin.value = currentUser.loginStats.primaryLogins > 0 ? 'Sim' : 'Não';
-            }
-            
-            profileMiningMachines.value = currentUser.miningMachines ? currentUser.miningMachines.length : 0;
-            
-            referralCount.textContent = currentUser.referrals.length;
-        }
-        
-        // Atualizar máquinas de mineração disponíveis
-        function updateMiningMachines() {
-            miningMachinesContainer.innerHTML = '';
-            
-            miningMachines.forEach(machine => {
-                const machineElement = document.createElement('div');
-                machineElement.className = `mining-machine ${machine.featured ? 'featured' : ''}`;
-                
-                machineElement.innerHTML = `
-                    <div class="machine-icon">
-                        <i class="${machine.icon}"></i>
-                    </div>
-                    <div class="machine-name">${machine.name}</div>
-                    <div class="machine-price">${machine.price} MT</div>
-                    <div class="machine-return">Retorno: ${machine.return} MT</div>
-                    <div class="machine-profit">${machine.profit}</div>
-                    <div class="machine-roi">${machine.roi}</div>
-                    <div class="machine-timer">Duração: ${machine.duration} horas</div>
-                    <div class="investment-buttons">
-                        <button class="btn-small success purchase-mining" data-machine-id="${machine.id}" ${currentUser.balance < machine.price ? 'disabled' : ''}>
-                            <i class="fas fa-shopping-cart"></i> Investir
-                        </button>
-                        <button class="btn-small info info-mining" data-machine-id="${machine.id}">
-                            <i class="fas fa-info-circle"></i> Detalhes
-                        </button>
-                    </div>
-                    <p style="font-size: 12px; color: var(--gray); margin-top: 10px;">${machine.description}</p>
-                `;
-                
-                miningMachinesContainer.appendChild(machineElement);
-            });
-            
-            // Adicionar event listeners para os botões de compra
-            document.querySelectorAll('.purchase-mining').forEach(button => {
-                button.addEventListener('click', function() {
-                    const machineId = parseInt(this.getAttribute('data-machine-id'));
-                    purchaseMiningMachine(machineId);
-                });
-            });
-            
-            // Adicionar event listeners para os botões de informação
-            document.querySelectorAll('.info-mining').forEach(button => {
-                button.addEventListener('click', function() {
-                    const machineId = parseInt(this.getAttribute('data-machine-id'));
-                    showMachineDetails(machineId);
-                });
-            });
-            
-            // Atualizar estatísticas de mineração
-            updateMiningStats();
-        }
-        
-        // Mostrar detalhes da máquina
-        function showMachineDetails(machineId) {
-            const machine = miningMachines.find(m => m.id === machineId);
-            if (!machine) return;
-            
-            const message = `
-                 ${machine.name}
-                 Investimento: ${machine.price} MT
-                 Retorno: ${machine.return} MT
-                 Lucro: ${machine.profit}
-                ⏰ Duração: ${machine.duration} horas
-                 ROI: ${machine.roi}
-                ${machine.description}
-            `;
-            
-            showNotification(message, 'info');
-        }
-        
-        // Investimento rápido
-        function quickInvest(amount) {
-            // Encontrar a máquina correspondente ao valor
-            const machine = miningMachines.find(m => m.price === amount);
-            
-            if (!machine) {
-                showNotification('Nenhuma máquina disponível para este valor!', 'error');
-                return;
-            }
-            
-            if (currentUser.balance < amount) {
-                showNotification('Saldo insuficiente para este investimento!', 'error');
-                return;
-            }
-            
-            // Comprar a máquina
-            purchaseMiningMachine(machine.id);
-        }
-        
-        // Atualizar máquinas de mineração ativas
-        function updateActiveMiningMachines() {
-            if (!currentUser.miningMachines || currentUser.miningMachines.length === 0) {
-                activeMiningSection.style.display = 'none';
-                return;
-            }
-            
-            activeMiningSection.style.display = 'block';
-            activeMiningMachines.innerHTML = '';
-            
-            currentUser.miningMachines.forEach((machine, index) => {
-                const now = new Date().getTime();
-                const startTime = new Date(machine.startTime).getTime();
-                const endTime = startTime + (machine.duration * 60 * 60 * 1000); // Converter horas para milissegundos
-                const timeLeft = endTime - now;
-                const totalTime = machine.duration * 60 * 60 * 1000;
-                const progress = Math.max(0, Math.min(100, ((totalTime - timeLeft) / totalTime) * 100));
-                
-                let statusText = '';
-                let statusClass = '';
-                
-                if (timeLeft <= 0) {
-                    statusText = 'Pronto para Coletar';
-                    statusClass = 'success';
-                } else {
-                    const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
-                    const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    statusText = `${hoursLeft}h ${minutesLeft}m restantes`;
-                    statusClass = 'warning';
+
+                // Verificar se o avião chegou ao crash point
+                if (AppState.aviatorGame.multiplier >= AppState.aviatorGame.crashPoint) {
+                    endAviatorGame(false);
                 }
-                
-                const machineElement = document.createElement('div');
-                machineElement.className = `mining-machine active-mining`;
-                
-                machineElement.innerHTML = `
-                    <div class="machine-icon">
-                        <i class="${machine.icon}"></i>
-                    </div>
-                    <div class="machine-name">${machine.name}</div>
-                    <div class="machine-price">Investido: ${machine.price} MT</div>
-                    <div class="machine-return">Retorno: ${machine.return} MT</div>
-                    <div class="machine-timer ${statusClass}">${statusText}</div>
-                    <div class="mining-progress">
-                        <div class="mining-progress-bar" style="width: ${progress}%"></div>
-                    </div>
-                    <button class="btn-full ${timeLeft <= 0 ? 'success' : 'secondary'} collect-mining" data-machine-index="${index}" ${timeLeft > 0 ? 'disabled' : ''}>
-                        <i class="fas fa-coins"></i> ${timeLeft <= 0 ? 'Coletar Lucro' : 'Em Andamento...'}
-                    </button>
-                `;
-                
-                activeMiningMachines.appendChild(machineElement);
-            });
-            
-            // Adicionar event listeners para os botões de coleta
-            document.querySelectorAll('.collect-mining').forEach(button => {
-                button.addEventListener('click', function() {
-                    const machineIndex = parseInt(this.getAttribute('data-machine-index'));
-                    collectMiningProfit(machineIndex);
-                });
-            });
-            
-            // Atualizar estatísticas de mineração
-            updateMiningStats();
+            }, 100);
         }
-        
-        // Atualizar estatísticas de mineração
-        function updateMiningStats() {
-            if (!currentUser.miningMachines) {
-                currentUser.miningMachines = [];
-            }
+
+        function aviatorCashout() {
+            if (!AppState.aviatorGame.isPlaying || AppState.aviatorGame.cashoutMultiplier > 0) return;
+
+            AppState.aviatorGame.cashoutMultiplier = AppState.aviatorGame.multiplier;
+            const winAmount = AppState.aviatorGame.betAmount * AppState.aviatorGame.cashoutMultiplier;
+            AppState.userBalance += winAmount;
+
+            showNotification(`Retirado com sucesso! ${AppState.aviatorGame.cashoutMultiplier.toFixed(2)}x - Ganhou $${winAmount.toFixed(2)}`, 'success');
             
-            const totalInvested = currentUser.miningMachines.reduce((sum, machine) => sum + machine.price, 0);
-            const totalProfit = currentUser.miningMachines
-                .filter(machine => {
-                    const now = new Date().getTime();
-                    const startTime = new Date(machine.startTime).getTime();
-                    const endTime = startTime + (machine.duration * 60 * 60 * 1000);
-                    return now >= endTime;
-                })
-                .reduce((sum, machine) => sum + (machine.return - machine.price), 0);
-            
-            const activeCount = currentUser.miningMachines.filter(machine => {
-                const now = new Date().getTime();
-                const startTime = new Date(machine.startTime).getTime();
-                const endTime = startTime + (machine.duration * 60 * 60 * 1000);
-                return now < endTime;
-            }).length;
-            
-            const dailyIncome = currentUser.miningMachines
-                .filter(machine => {
-                    const now = new Date().getTime();
-                    const startTime = new Date(machine.startTime).getTime();
-                    const endTime = startTime + (machine.duration * 60 * 60 * 1000);
-                    return now >= endTime;
-                })
-                .reduce((sum, machine) => sum + ((machine.return - machine.price) / (machine.duration / 24)), 0);
-            
-            totalMiningInvested.textContent = totalInvested + ' MT';
-            totalMiningProfit.textContent = totalProfit + ' MT';
-            activeMachines.textContent = activeCount;
-            dailyMiningIncome.textContent = Math.round(dailyIncome) + ' MT';
+            endAviatorGame(true);
         }
-        
-        // Comprar máquina de mineração
-        function purchaseMiningMachine(machineId) {
-            const machine = miningMachines.find(m => m.id === machineId);
-            
-            if (!machine) {
-                showNotification('Máquina não encontrada!', 'error');
-                return;
+
+        function endAviatorGame(isCashout) {
+            clearInterval(AppState.aviatorGame.flightInterval);
+            AppState.aviatorGame.isPlaying = false;
+
+            document.getElementById('aviator-cashout').disabled = true;
+
+            if (!isCashout) {
+                showNotification(`O avião decolou! Multiplicador final: ${AppState.aviatorGame.multiplier.toFixed(2)}x`, 'error');
             }
-            
-            if (currentUser.balance < machine.price) {
-                showNotification('Saldo insuficiente para comprar esta máquina!', 'error');
-                return;
-            }
-            
-            // Deduzir o valor do saldo
-            currentUser.balance -= machine.price;
-            
-            // Adicionar máquina às máquinas ativas do usuário
-            if (!currentUser.miningMachines) {
-                currentUser.miningMachines = [];
-            }
-            
-            currentUser.miningMachines.push({
-                ...machine,
-                startTime: new Date().toISOString()
-            });
-            
-            // Registrar transação
-            currentUser.transactions.push({
-                type: 'mining_investment',
-                amount: -machine.price,
-                description: `Compra de ${machine.name}`,
-                date: new Date().toISOString()
-            });
-            
-            // Atualizar localStorage
-            updateUserInStorage();
-            updateUserInfo();
-            updateMiningMachines();
-            updateActiveMiningMachines();
-            
-            showNotification(`Máquina ${machine.name} comprada com sucesso! Começará a minerar imediatamente.`, 'success');
+
+            // Resetar para próximo jogo
+            setTimeout(() => {
+                initializeAviatorGame();
+                document.getElementById('aviator-airplane').style.left = '0px';
+                document.getElementById('aviator-multiplier-display').textContent = '1.00x';
+                document.getElementById('aviator-potential-display').textContent = 'Ganho: $0.00';
+                document.getElementById('aviator-multiplier').textContent = '1.00';
+                document.getElementById('aviator-potential').textContent = '0.00';
+            }, 3000);
         }
-        
-        // Coletar lucro da mineração
-        function collectMiningProfit(machineIndex) {
-            if (!currentUser.miningMachines || !currentUser.miningMachines[machineIndex]) {
-                showNotification('Máquina não encontrada!', 'error');
-                return;
-            }
-            
-            const machine = currentUser.miningMachines[machineIndex];
-            const now = new Date().getTime();
-            const startTime = new Date(machine.startTime).getTime();
-            const endTime = startTime + (machine.duration * 60 * 60 * 1000);
-            
-            if (now < endTime) {
-                showNotification('Esta máquina ainda não terminou de minerar!', 'error');
-                return;
-            }
-            
-            // Calcular lucro
-            const profit = machine.return - machine.price;
-            
-            // Adicionar lucro ao saldo
-            currentUser.balance += machine.return;
-            
-            // Registrar transação
-            currentUser.transactions.push({
-                type: 'mining',
-                amount: machine.return,
-                description: `Lucro de mineração: ${machine.name}`,
-                date: new Date().toISOString()
-            });
-            
-            // Remover máquina da lista de ativas
-            currentUser.miningMachines.splice(machineIndex, 1);
-            
-            // Atualizar localStorage
-            updateUserInStorage();
-            updateUserInfo();
-            updateMiningMachines();
-            updateActiveMiningMachines();
-            
-            showNotification(`Lucro de ${machine.return} MT coletado da máquina ${machine.name}!`, 'success');
+
+        // ==============================
+        // AUTENTICAÇÃO
+        // ==============================
+        function loginUser(email, password) {
+            // Simular autenticação
+            AppState.currentUser = {
+                username: email.split('@')[0],
+                email: email,
+                country: 'Portugal',
+                currency: 'EUR'
+            };
+            AppState.userBalance = 1000.00;
+
+            // Salvar no localStorage
+            localStorage.setItem('currentUser', JSON.stringify(AppState.currentUser));
+            localStorage.setItem('userBalance', AppState.userBalance.toString());
+
+            updateUserInterface();
+            closeAuthModal();
+            showNotification('Login realizado com sucesso!', 'success');
         }
-        
-        // Iniciar verificação de mineração
-        function startMiningCheck() {
-            // Verificar a cada minuto se alguma máquina terminou
-            miningInterval = setInterval(() => {
-                if (currentUser && currentUser.miningMachines && currentUser.miningMachines.length > 0) {
-                    updateActiveMiningMachines();
-                }
-            }, 60000); // 1 minuto
+
+        function registerUser(username, email, password, country, currency) {
+            // Simular registro
+            AppState.currentUser = {
+                username: username,
+                email: email,
+                country: country,
+                currency: currency
+            };
+            AppState.userBalance = 1000.00; // Bônus de boas-vindas
+
+            // Salvar no localStorage
+            localStorage.setItem('currentUser', JSON.stringify(AppState.currentUser));
+            localStorage.setItem('userBalance', AppState.userBalance.toString());
+
+            updateUserInterface();
+            closeAuthModal();
+            showNotification('Conta criada com sucesso! Bónus de $1000 adicionado.', 'success');
         }
-        
-        // Controlar o timer
-        function toggleTimer() {
-            if (timerRunning) {
-                // Parar o timer
-                clearInterval(timerInterval);
-                timerRunning = false;
-                startTimerBtn.innerHTML = '<i class="fas fa-play"></i> Continuar Visualização';
-            } else {
-                // Iniciar o timer
-                timerRunning = true;
-                startTimerBtn.innerHTML = '<i class="fas fa-pause"></i> Parar Visualização';
-                
-                timerInterval = setInterval(() => {
-                    timeLeft--;
-                    
-                    // Atualizar display
-                    const minutes = Math.floor(timeLeft / 60);
-                    const seconds = timeLeft % 60;
-                    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    
-                    // Atualizar progresso visual
-                    const progress = ((300 - timeLeft) / 300) * 100;
-                    timerProgress.style.background = `conic-gradient(var(--secondary) ${progress}%, var(--gray-light) 0%)`;
-                    
-                    // Timer terminado
-                    if (timeLeft <= 0) {
-                        clearInterval(timerInterval);
-                        timerRunning = false;
-                        
-                        // Adicionar recompensa
-                        currentUser.balance += 10; // 10 MT por 5 minutos
-                        currentUser.transactions.push({
-                            type: 'timer',
-                            amount: 10,
-                            description: 'Recompensa de visualização (5 minutos)',
-                            date: new Date().toISOString()
-                        });
-                        
-                        // Atualizar localStorage
-                        updateUserInStorage();
-                        updateUserInfo();
-                        
-                        // Marcar como usado hoje
-                        const today = new Date().toDateString();
-                        localStorage.setItem(`timerUsed_${currentUser.phone}`, today);
-                        
-                        startTimerBtn.disabled = true;
-                        startTimerBtn.textContent = 'Timer Diário Concluído';
-                        
-                        showNotification('Parabéns! Ganhou 10 MT por completar 5 minutos de visualização.', 'success');
-                    }
-                }, 1000);
-            }
-        }
-        
-        // Confirmar depósito
-        function confirmDeposit() {
-            const amount = parseInt(depositAmount.value);
-            const txnId = transactionId.value;
-            const phone = depositPhone.value;
-            
-            if (!amount || amount < 00000) {
-                showAlert(depositAlert, 'O valor mínimo para depósito é 300.', 'error');
-                return;
-            }
-            
-            if (!txnId) {
-                showAlert(depositAlert, 'Por favor, insira o ID da transação Paga Fácil.', 'error');
-                return;
-            }
-            
-            if (!phone) {
-                showAlert(depositAlert, 'Por favor, insira o seu número Paga Fácil.', 'error');
-                return;
-            }
-            
-            // Simular processamento de depósito
-            currentUser.balance += amount;
-            currentUser.totalDeposited += amount;
-            currentUser.transactions.push({
-                type: 'deposit',
-                amount: amount,
-                description: `Depósito via Paga Fácil (ID: ${txnId})`,
-                date: new Date().toISOString()
-            });
-            
-            // Atualizar localStorage
-            updateUserInStorage();
-            updateUserInfo();
-            updateMiningMachines();
-            
-            showNotification(`Depósito de ${amount} MT confirmado com sucesso! Saldo creditado.`, 'success');
-            
-            // Limpar formulário
-            depositAmount.value = '';
-            transactionId.value = '';
-            depositPhone.value = '';
-        }
-        
-        // Solicitar levantamento
-        function requestWithdraw() {
-            const amount = parseInt(withdrawAmount.value);
-            const pagaFacil = pagaFacilNumber.value;
-            
-            if (!amount || amount < 100) {
-                showAlert(withdrawAlert, 'O valor mínimo para levantamento é 100 MT.', 'error');
-                return;
-            }
-            
-            if (!pagaFacil) {
-                showAlert(withdrawAlert, 'Por favor, insira o seu número Paga Fácil.', 'error');
-                return;
-            }
-            
-            if (amount > currentUser.balance) {
-                showAlert(withdrawAlert, 'Saldo insuficiente para este levantamento.', 'error');
-                return;
-            }
-            
-            // Processar levantamento
-            const tax = 5; // Taxa de 5 MT
-            const totalDeduction = amount + tax;
-            
-            currentUser.balance -= totalDeduction;
-            currentUser.transactions.push({
-                type: 'withdraw',
-                amount: amount,
-                description: `Levantamento via Paga Fácil para ${pagaFacil} (taxa: ${tax} MT)`,
-                date: new Date().toISOString()
-            });
-            
-            // Atualizar localStorage
-            updateUserInStorage();
-            updateUserInfo();
-            updateMiningMachines();
-            
-            showNotification(`Levantamento de ${amount} MT solicitado com sucesso! Será processado em até 24 horas.`, 'success');
-            
-            // Limpar formulário
-            withdrawAmount.value = '';
-            pagaFacilNumber.value = '';
-        }
-        
-        // Terminar sessão
-        function logout() {
-            currentUser = null;
+
+        function logoutUser() {
+            AppState.currentUser = null;
+            AppState.userBalance = 0;
+            AppState.betSlip = [];
+
             localStorage.removeItem('currentUser');
-            dashboard.style.display = 'none';
-            authScreen.style.display = 'block';
-            
-            // Limpar formulários
-            document.getElementById('phone').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('referral-code').value = '';
-            
-            // Parar o timer se estiver a correr
-            if (timerRunning) {
-                clearInterval(timerInterval);
-                timerRunning = false;
+            localStorage.removeItem('userBalance');
+
+            updateUserInterface();
+            showNotification('Logout realizado com sucesso.', 'info');
+        }
+
+        // ==============================
+        // ATUALIZAÇÕES DE INTERFACE
+        // ==============================
+        function updateUserInterface() {
+            if (AppState.currentUser) {
+                document.getElementById('username-display').textContent = AppState.currentUser.username;
+                document.getElementById('user-email').textContent = AppState.currentUser.email;
+                document.getElementById('user-avatar').textContent = AppState.currentUser.username.charAt(0).toUpperCase();
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('register-btn').style.display = 'none';
+                
+                // Adicionar botão de logout
+                if (!document.getElementById('logout-btn')) {
+                    const logoutBtn = document.createElement('button');
+                    logoutBtn.id = 'logout-btn';
+                    logoutBtn.className = 'btn btn-outline';
+                    logoutBtn.textContent = 'Sair';
+                    logoutBtn.onclick = logoutUser;
+                    document.querySelector('.auth-buttons').appendChild(logoutBtn);
+                }
+            } else {
+                document.getElementById('username-display').textContent = 'Convidado';
+                document.getElementById('user-email').textContent = 'Faça login para aceder ao seu perfil';
+                document.getElementById('user-avatar').textContent = '?';
+                document.getElementById('login-btn').style.display = 'inline-block';
+                document.getElementById('register-btn').style.display = 'inline-block';
+                
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn) logoutBtn.remove();
             }
-            
-            showNotification('Sessão terminada com sucesso!', 'info');
+
+            updateUserBalance();
+            updateBetCount();
         }
-        
-        // Atualizar usuário no localStorage
-        function updateUserInStorage() {
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userIndex = users.findIndex(u => u.phone === currentUser.phone);
-            if (userIndex !== -1) {
-                users[userIndex] = currentUser;
-                localStorage.setItem('users', JSON.stringify(users));
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        function updateUserBalance() {
+            document.getElementById('user-balance').textContent = AppState.userBalance.toFixed(2);
+            document.getElementById('aviator-balance').textContent = AppState.userBalance.toFixed(2);
+        }
+
+        function updateBetCount() {
+            document.getElementById('bet-count').textContent = AppState.betSlip.length;
+        }
+
+        function updateLiveCount() {
+            const liveCount = SportsData.liveMatches.length;
+            document.getElementById('live-count').textContent = `${liveCount} jogos em direto`;
+        }
+
+        // ==============================
+        // NAVEGAÇÃO E MODAIS
+        // ==============================
+        function showSection(sectionName) {
+            // Esconder todas as sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar section selecionada
+            document.getElementById(`${sectionName}-section`).classList.add('active');
+
+            // Atualizar navegação
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.nav-link[data-page="${sectionName}"]`).classList.add('active');
+
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`.nav-tab[data-tab="${sectionName}"]`).classList.add('active');
+
+            // Atualizar conteúdo específico
+            if (sectionName === 'sports') {
+                renderSportsContent();
             }
+
+            AppState.currentSection = sectionName;
         }
-        
-        // Gerar código de referência
-        function generateReferralCode() {
-            return Math.random().toString(36).substring(2, 8).toUpperCase();
+
+        function showAviatorGame() {
+            showSection('casino');
+            // Scroll para o jogo Aviator
+            document.getElementById('casino-section').scrollIntoView({ behavior: 'smooth' });
         }
-        
-        // Mostrar alertas
-        function showAlert(alertElement, message, type) {
-            alertElement.textContent = message;
-            alertElement.className = 'alert';
-            alertElement.classList.add('alert-' + type);
-            alertElement.style.display = 'block';
-            
+
+        function openBetSlip() {
+            document.getElementById('bet-slip').classList.add('open');
+        }
+
+        function closeBetSlip() {
+            document.getElementById('bet-slip').classList.remove('open');
+        }
+
+        function showAuthModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+        }
+
+        // ==============================
+        // EVENT LISTENERS
+        // ==============================
+        function setupEventListeners() {
+            // Navegação principal
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showSection(link.dataset.page);
+                });
+            });
+
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    showSection(tab.dataset.tab);
+                });
+            });
+
+            // Filtros de desporto
+            document.querySelectorAll('.sport-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.sport-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    AppState.currentSport = this.dataset.sport;
+                    renderSportsContent();
+                });
+            });
+
+            // Botões de autenticação
+            document.getElementById('login-btn').addEventListener('click', showAuthModal);
+            document.getElementById('register-btn').addEventListener('click', showAuthModal);
+            document.getElementById('hero-register-btn').addEventListener('click', showAuthModal);
+
+            // Modal de autenticação
+            document.querySelector('.close-modal').addEventListener('click', closeAuthModal);
+            document.getElementById('auth-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('auth-modal')) {
+                    closeAuthModal();
+                }
+            });
+
+            // Tabs do modal de auth
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
+                    document.getElementById(`${this.dataset.tab}-form`).classList.add('active');
+                });
+            });
+
+            // Formulários de auth
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                loginUser(email, password);
+            });
+
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('register-username').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const country = document.getElementById('register-country').value;
+                const currency = document.getElementById('register-currency').value;
+                registerUser(username, email, password, country, currency);
+            });
+
+            // Boletim de apostas
+            document.getElementById('quick-bet').addEventListener('click', openBetSlip);
+            document.getElementById('close-bet-slip').addEventListener('click', closeBetSlip);
+            document.getElementById('total-bet-amount').addEventListener('input', calculatePotentialWin);
+            document.getElementById('place-bet-btn').addEventListener('click', placeBet);
+
+            // Jogo Aviator
+            document.getElementById('aviator-place-bet').addEventListener('click', startAviatorGame);
+            document.getElementById('aviator-cashout').addEventListener('click', aviatorCashout);
+
+            // Métodos de pagamento
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    if (!AppState.currentUser) {
+                        showAuthModal();
+                        return;
+                    }
+                    showNotification(`Redirecionando para depósito via ${this.dataset.method.toUpperCase()}`, 'info');
+                    // Simular depósito
+                    setTimeout(() => {
+                        AppState.userBalance += 100;
+                        updateUserBalance();
+                        showNotification('Depósito de $100 realizado com sucesso!', 'success');
+                    }, 2000);
+                });
+            });
+        }
+
+        function attachOddButtonListeners() {
+            document.querySelectorAll('.odd-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const matchId = parseInt(this.dataset.match);
+                    const selection = this.dataset.selection;
+                    const odds = this.dataset.odds;
+                    const teams = this.closest('.match-card').querySelector('.match-teams').textContent;
+                    const selectionName = this.querySelector('.odd-type').textContent;
+                    
+                    addToBetSlip(matchId, selection, odds, teams, selectionName);
+                });
+            });
+        }
+
+        // ==============================
+        // FUNÇÕES UTILITÁRIAS
+        // ==============================
+        function showNotification(message, type = 'info') {
+            // Criar notificação
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 3000;
+                max-width: 300px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+
+            // Cor baseada no tipo
+            const colors = {
+                success: '#2ecc71',
+                error: '#e74c3c',
+                warning: '#f39c12',
+                info: '#3498db'
+            };
+            notification.style.backgroundColor = colors[type] || colors.info;
+
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Animação de entrada
             setTimeout(() => {
-                alertElement.style.display = 'none';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            // Remover após 5 segundos
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
             }, 5000);
         }
-        
-        // Mostrar notificação
-        function showNotification(message, type) {
-            notificationText.textContent = message;
-            notification.className = 'notification ' + type;
-            notification.classList.add('show');
-            
-            // Definir ícone baseado no tipo
-            const icon = notification.querySelector('i');
-            icon.className = type === 'success' ? 'fas fa-check-circle' : 
-                            type === 'error' ? 'fas fa-exclamation-circle' : 
-                            'fas fa-info-circle';
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
+
+        function startLiveUpdates() {
+            setInterval(() => {
+                // Atualizar odds aleatoriamente
+                SportsData.liveMatches.forEach(match => {
+                    if (Math.random() > 0.7) {
+                        const change = (Math.random() - 0.5) * 0.1;
+                        if (match.odds.home) match.odds.home = Math.max(1.1, match.odds.home + change);
+                        if (match.odds.away) match.odds.away = Math.max(1.1, match.odds.away + change);
+                        if (match.odds.draw) match.odds.draw = Math.max(1.1, match.odds.draw + change);
+                    }
+                });
+
+                // Atualizar placares
+                SportsData.liveMatches.forEach(match => {
+                    if (Math.random() > 0.9) {
+                        if (Math.random() > 0.5) {
+                            match.scoreA += 1;
+                        } else {
+                            match.scoreB += 1;
+                        }
+                    }
+                });
+
+                // Re-renderizar se estiver na seção de desportos
+                if (AppState.currentSection === 'sports' || AppState.currentSection === 'home') {
+                    renderSportsContent();
+                    renderHomeContent();
+                }
             }, 5000);
         }
-        
-        // Copiar para a área de transferência
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        }
+
+        // ==============================
+        // INICIALIZAÇÃO GLOBAL
+        // ==============================
+        // Expor funções globais
+        window.showSection = showSection;
+        window.showAviatorGame = showAviatorGame;
+        window.removeFromBetSlip = removeFromBetSlip;
     </script>
 </body>
 </html>
