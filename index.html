@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forex Prime | Carteira</title>
+    <title>Forex Prime | Plataforma Completa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
@@ -22,18 +23,198 @@
             --danger: #e74c3c;
             --success: #2ecc71;
             --warning: #f39c12;
+            --info: #3498db;
         }
         
         body {
             background: linear-gradient(135deg, #1a2a6c, #2a4a7c, #3a6a9c);
             color: var(--dark);
             min-height: 100vh;
-            padding: 20px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Tela de Login/Registro */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .auth-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .auth-logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+        
+        .auth-logo h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #777;
+            transition: all 0.3s;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+        
+        .btn-google {
+            background: white;
+            color: #333;
+            border: 1px solid #ddd;
+            margin-top: 15px;
+        }
+        
+        .btn-google:hover {
+            background: #f5f5f5;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: #777;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 45%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 45%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+        
+        .dashboard.active {
+            display: block;
         }
         
         header {
@@ -41,7 +222,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .logo {
@@ -64,6 +245,7 @@
             display: flex;
             align-items: center;
             color: white;
+            position: relative;
         }
         
         .user-avatar {
@@ -77,45 +259,52 @@
             margin-right: 15px;
             font-weight: bold;
             font-size: 1.2rem;
-        }
-        
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            gap: 20px;
-        }
-        
-        .sidebar {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .nav-item {
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            color: white;
             cursor: pointer;
-            transition: all 0.3s;
+        }
+        
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            padding: 10px 0;
+            z-index: 100;
+            display: none;
+        }
+        
+        .user-dropdown.active {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
             display: flex;
             align-items: center;
         }
         
-        .nav-item i {
+        .dropdown-item i {
             margin-right: 10px;
-            font-size: 1.2rem;
+            color: var(--primary);
         }
         
-        .nav-item:hover, .nav-item.active {
-            background: rgba(255, 255, 255, 0.2);
+        .dropdown-item:hover {
+            background: #f5f5f5;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
         }
         
         .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
         
@@ -124,7 +313,6 @@
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
         }
         
         .card-header {
@@ -186,31 +374,6 @@
             margin-top: 20px;
         }
         
-        .btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .btn i {
-            margin-right: 8px;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--secondary);
-        }
-        
         .btn-outline {
             background: transparent;
             border: 1px solid var(--primary);
@@ -219,6 +382,265 @@
         
         .btn-outline:hover {
             background: rgba(26, 42, 108, 0.1);
+        }
+        
+        .btn-outline-light {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+        
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .trading-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .pair-selector {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pair-button {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pair-button.active {
+            background: var(--accent);
+        }
+        
+        .timeframe-selector {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .timeframe-button {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .timeframe-button.active {
+            background: var(--primary);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .chart-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .chart-type-selector {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chart-type-button {
+            padding: 8px 15px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chart-type-button.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .indicators-selector {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .indicator-button {
+            padding: 8px 15px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .indicator-button.active {
+            background: var(--info);
+            color: white;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .market-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .market-pair {
+            font-weight: 600;
+        }
+        
+        .market-price {
+            font-weight: 700;
+        }
+        
+        .trade-type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .trade-type-button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .trade-type-button.buy {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--success);
+        }
+        
+        .trade-type-button.buy.active {
+            background: var(--success);
+            color: white;
+        }
+        
+        .trade-type-button.sell {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--danger);
+        }
+        
+        .trade-type-button.sell.active {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .amount-input {
+            position: relative;
+        }
+        
+        .amount-input::before {
+            content: "$";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-weight: 600;
+        }
+        
+        .amount-input input {
+            padding-left: 30px;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 5px;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #27ae60;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .open-trades {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .trade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .trade-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .trade-info p {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .trade-amount {
+            font-weight: 600;
+        }
+        
+        .trade-profit {
+            font-weight: 600;
+            font-size: 0.9rem;
         }
         
         .payment-methods {
@@ -237,11 +659,17 @@
             align-items: center;
             transition: all 0.3s;
             cursor: pointer;
+            position: relative;
         }
         
         .payment-card:hover {
             border-color: var(--primary);
             transform: translateY(-5px);
+        }
+        
+        .payment-card.active {
+            border-color: var(--primary);
+            background: rgba(26, 42, 108, 0.05);
         }
         
         .payment-icon {
@@ -261,49 +689,33 @@
             text-align: center;
         }
         
+        .payment-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .payment-action {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-action:hover {
+            background: #e5e5e5;
+        }
+        
         .withdrawal-form {
             margin-top: 20px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        .amount-input {
-            position: relative;
-        }
-        
-        .amount-input::before {
-            content: "$";
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #777;
-        }
-        
-        .amount-input input {
-            padding-left: 30px;
         }
         
         .history-item {
@@ -312,6 +724,14 @@
             align-items: center;
             padding: 15px 0;
             border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+        
+        .history-item:hover {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding-left: 10px;
+            padding-right: 10px;
         }
         
         .history-details {
@@ -338,6 +758,10 @@
             background: var(--danger);
         }
         
+        .trade .history-icon {
+            background: var(--info);
+        }
+        
         .history-info h4 {
             font-size: 1rem;
             margin-bottom: 5px;
@@ -360,6 +784,10 @@
             color: var(--danger);
         }
         
+        .trade .history-amount {
+            color: var(--info);
+        }
+        
         .status-badge {
             padding: 5px 10px;
             border-radius: 20px;
@@ -377,12 +805,106 @@
             color: var(--warning);
         }
         
-        @media (max-width: 992px) {
-            .dashboard {
-                grid-template-columns: 1fr;
+        .status-processing {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--info);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+        }
+        
+        .notification.active {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .notification.success {
+            background: var(--success);
+        }
+        
+        .notification.error {
+            background: var(--danger);
+        }
+        
+        .notification.info {
+            background: var(--info);
+        }
+        
+        .notification i {
+            margin-right: 10px;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
             }
-            
-            .main-content {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .dashboard-content {
                 grid-template-columns: 1fr;
             }
         }
@@ -392,6 +914,25 @@
                 flex-direction: column;
             }
             
+            .trading-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .pair-selector, .timeframe-selector {
+                flex-wrap: wrap;
+            }
+            
+            .chart-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .chart-type-selector, .indicators-selector {
+                flex-wrap: wrap;
+            }
+            
             .payment-methods {
                 grid-template-columns: 1fr;
             }
@@ -399,77 +940,210 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-chart-line"></i>
-                <h1>Forex Prime</h1>
-            </div>
-            <div class="user-menu">
-                <div class="user-avatar">JS</div>
-                <div>
-                    <div class="user-name">João Silva</div>
-                    <div class="user-email">joao.silva@email.com</div>
+    <!-- Tela de Login/Registro -->
+    <div class="auth-container" id="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>Forex Prime</h1>
                 </div>
-            </div>
-        </header>
-        
-        <div class="dashboard">
-            <div class="sidebar">
-                <div class="nav-item active">
-                    <i class="fas fa-wallet"></i>
-                    <span>Carteira</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Dashboard</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-exchange-alt"></i>
-                    <span>Transações</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-credit-card"></i>
-                    <span>Pagamentos</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Configurações</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Ajuda</span>
-                </div>
+                <p>Acesso à plataforma de trading profissional</p>
             </div>
             
-            <div class="main-content">
-                <div class="left-column">
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Login</div>
+                <div class="auth-tab" data-tab="register">Registro</div>
+            </div>
+            
+            <div id="login-form" class="auth-form active">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-email">E-mail</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <div class="password-container">
+                            <input type="password" class="form-control" id="login-password" placeholder="Sua senha" required>
+                            <span class="toggle-password" id="toggle-login-password">
+                                <i class="far fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" id="remember" style="margin-right: 8px;">
+                            <label for="remember" style="margin-bottom: 0;">Lembrar-me</label>
+                        </div>
+                        <a href="#" style="color: var(--primary); text-decoration: none;">Esqueceu a senha?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                    
+                    <div class="divider">ou</div>
+                    
+                    <button type="button" class="btn btn-google" id="google-login">
+                        <i class="fab fa-google"></i> Entrar com Google
+                    </button>
+                </form>
+            </div>
+            
+            <div id="register-form" class="auth-form">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="register-name">Nome Completo</label>
+                        <input type="text" class="form-control" id="register-name" placeholder="Seu nome completo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">E-mail</label>
+                        <input type="email" class="form-control" id="register-email" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Senha</label>
+                        <div class="password-container">
+                            <input type="password" class="form-control" id="register-password" placeholder="Crie uma senha forte" required>
+                            <span class="toggle-password" id="toggle-register-password">
+                                <i class="far fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-confirm-password">Confirmar Senha</label>
+                        <div class="password-container">
+                            <input type="password" class="form-control" id="register-confirm-password" placeholder="Confirme sua senha" required>
+                            <span class="toggle-password" id="toggle-register-confirm-password">
+                                <i class="far fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Criar Conta
+                    </button>
+                    
+                    <div class="divider">ou</div>
+                    
+                    <button type="button" class="btn btn-google" id="google-register">
+                        <i class="fab fa-google"></i> Registrar com Google
+                    </button>
+                    
+                    <div style="font-size: 0.8rem; color: #777; margin-top: 20px; text-align: center;">
+                        Ao registrar, você concorda com nossos <a href="#" style="color: var(--primary);">Termos de Serviço</a> e <a href="#" style="color: var(--primary);">Política de Privacidade</a>.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dashboard Principal -->
+    <div class="dashboard" id="dashboard">
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>Forex Prime</h1>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="user-avatar">JS</div>
+                    <div>
+                        <div class="user-name">João Silva</div>
+                        <div class="user-email">joao.silva@email.com</div>
+                    </div>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Meu Perfil</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Configurações</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-wallet"></i>
+                            <span>Carteira</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span id="logout-button">Sair</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="dashboard-content">
+                <div class="main-content">
                     <div class="card balance-card">
                         <div class="card-header">
                             <h2 class="card-title" style="color: white;">Saldo da Carteira</h2>
-                            <i class="fas fa-eye"></i>
+                            <i class="fas fa-eye" id="toggle-balance"></i>
                         </div>
-                        <div class="balance-amount">$12,458.75</div>
+                        <div class="balance-amount" id="balance-amount">$12,458.75</div>
                         <div class="balance-change positive">
                             <i class="fas fa-arrow-up"></i>
                             <span>+ $245.50 (2.1%) este mês</span>
                         </div>
                         <div class="action-buttons">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" id="add-funds">
                                 <i class="fas fa-plus"></i> Adicionar Fundos
                             </button>
-                            <button class="btn btn-outline" style="color: white; border-color: white;">
+                            <button class="btn btn-outline-light" id="transfer-funds">
                                 <i class="fas fa-exchange-alt"></i> Transferir
                             </button>
+                            <button class="btn btn-outline-light" id="withdraw-funds">
+                                <i class="fas fa-hand-holding-usd"></i> Levantamento
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="trading-header">
+                            <div class="pair-selector">
+                                <button class="pair-button active" data-pair="EUR/USD">EUR/USD</button>
+                                <button class="pair-button" data-pair="GBP/USD">GBP/USD</button>
+                                <button class="pair-button" data-pair="USD/JPY">USD/JPY</button>
+                                <button class="pair-button" data-pair="BTC/USD">BTC/USD</button>
+                            </div>
+                            
+                            <div class="timeframe-selector">
+                                <button class="timeframe-button" data-timeframe="1m">1M</button>
+                                <button class="timeframe-button active" data-timeframe="15m">15M</button>
+                                <button class="timeframe-button" data-timeframe="1h">1H</button>
+                                <button class="timeframe-button" data-timeframe="4h">4H</button>
+                                <button class="timeframe-button" data-timeframe="1d">1D</button>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <canvas id="tradingChart"></canvas>
+                        </div>
+                        <div class="chart-controls">
+                            <div class="chart-type-selector">
+                                <button class="chart-type-button active" data-type="candlestick">Candlestick</button>
+                                <button class="chart-type-button" data-type="line">Linha</button>
+                                <button class="chart-type-button" data-type="area">Área</button>
+                            </div>
+                            <div class="indicators-selector">
+                                <button class="indicator-button" data-indicator="sma">SMA</button>
+                                <button class="indicator-button active" data-indicator="macd">MACD</button>
+                                <button class="indicator-button" data-indicator="rsi">RSI</button>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Histórico de Transações</h2>
-                            <a href="#" style="color: var(--primary);">Ver tudo</a>
+                            <a href="#" id="view-all-transactions" style="color: var(--primary);">Ver tudo</a>
                         </div>
-                        <div class="history-list">
+                        <div class="history-list" id="history-list">
                             <div class="history-item deposit">
                                 <div class="history-details">
                                     <div class="history-icon">
@@ -496,102 +1170,112 @@
                                 <div class="history-amount">- $500.00</div>
                             </div>
                             
-                            <div class="history-item deposit">
+                            <div class="history-item trade">
                                 <div class="history-details">
                                     <div class="history-icon">
-                                        <i class="fas fa-arrow-down"></i>
+                                        <i class="fas fa-exchange-alt"></i>
                                     </div>
                                     <div class="history-info">
-                                        <h4>Depósito</h4>
-                                        <p>05 Out 2023 • PayPal</p>
+                                        <h4>Trade - EUR/USD</h4>
+                                        <p>10 Out 2023 • COMPRA</p>
                                     </div>
                                 </div>
-                                <div class="history-amount">+ $750.00</div>
-                            </div>
-                            
-                            <div class="history-item withdrawal">
-                                <div class="history-details">
-                                    <div class="history-icon">
-                                        <i class="fas fa-arrow-up"></i>
-                                    </div>
-                                    <div class="history-info">
-                                        <h4>Levantamento</h4>
-                                        <p>28 Set 2023 • Transferência bancária</p>
-                                        <span class="status-badge status-pending">Pendente</span>
-                                    </div>
-                                </div>
-                                <div class="history-amount">- $1,200.00</div>
+                                <div class="history-amount">+ $124.50</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="right-column">
+                <div class="sidebar">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Painel de Trading</h2>
+                        </div>
+                        <div class="trade-type-selector">
+                            <button class="trade-type-button buy active" data-trade-type="buy">COMPRAR</button>
+                            <button class="trade-type-button sell" data-trade-type="sell">VENDER</button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="trade-amount">Valor do Investimento</label>
+                            <div class="amount-input">
+                                <input type="number" class="form-control" id="trade-amount" value="1000" min="10" max="10000">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="leverage">Alavancagem</label>
+                            <select class="form-control" id="leverage">
+                                <option value="1">1:1</option>
+                                <option value="10">1:10</option>
+                                <option value="50" selected>1:50</option>
+                                <option value="100">1:100</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stop-loss">Stop Loss</label>
+                            <div class="amount-input">
+                                <input type="number" class="form-control" id="stop-loss" placeholder="0.00" step="0.0001">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="take-profit">Take Profit</label>
+                            <div class="amount-input">
+                                <input type="number" class="form-control" id="take-profit" placeholder="0.00" step="0.0001">
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-success" id="execute-trade">
+                            <i class="fas fa-play"></i> Executar Trade
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Mercado em Tempo Real</h2>
+                        </div>
+                        <div class="market-list" id="market-list">
+                            <!-- Os dados de mercado serão preenchidos via JavaScript -->
+                        </div>
+                    </div>
+                    
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">Métodos de Pagamento</h2>
-                            <button class="btn btn-outline" style="padding: 8px 12px;">
+                            <button class="btn btn-outline" id="add-payment-method" style="padding: 8px 12px;">
                                 <i class="fas fa-plus"></i> Adicionar
                             </button>
                         </div>
-                        <div class="payment-methods">
-                            <div class="payment-card">
+                        <div class="payment-methods" id="payment-methods">
+                            <div class="payment-card active" data-method="visa">
+                                <div class="payment-actions">
+                                    <div class="payment-action edit-payment" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    <div class="payment-action delete-payment" title="Remover">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
                                 <i class="fab fa-cc-visa payment-icon"></i>
                                 <div class="payment-name">Visa</div>
                                 <div class="payment-details">**** 4532</div>
                                 <div class="payment-details">Expira 05/25</div>
                             </div>
                             
-                            <div class="payment-card">
+                            <div class="payment-card" data-method="paypal">
+                                <div class="payment-actions">
+                                    <div class="payment-action edit-payment" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    <div class="payment-action delete-payment" title="Remover">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
                                 <i class="fab fa-paypal payment-icon"></i>
                                 <div class="payment-name">PayPal</div>
                                 <div class="payment-details">joao.silva@email.com</div>
-                            </div>
-                            
-                            <div class="payment-card">
-                                <i class="fas fa-university payment-icon"></i>
-                                <div class="payment-name">Transferência</div>
-                                <div class="payment-details">Banco Nacional</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Fazer Levantamento</h2>
-                        </div>
-                        <div class="withdrawal-form">
-                            <div class="form-group">
-                                <label for="withdrawal-method">Método de Levantamento</label>
-                                <select class="form-control" id="withdrawal-method">
-                                    <option>Conta Bancária</option>
-                                    <option>Cartão Visa</option>
-                                    <option>PayPal</option>
-                                    <option>Skrill</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="withdrawal-amount">Valor</label>
-                                <div class="amount-input">
-                                    <input type="number" class="form-control" id="withdrawal-amount" placeholder="0.00" min="10" max="12458.75">
-                                </div>
-                                <div style="font-size: 0.8rem; color: #777; margin-top: 5px;">
-                                    Saldo disponível: $12,458.75
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="withdrawal-notes">Notas (opcional)</label>
-                                <textarea class="form-control" id="withdrawal-notes" rows="2" placeholder="Adicione uma descrição para esta transação"></textarea>
-                            </div>
-                            
-                            <button class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-paper-plane"></i> Solicitar Levantamento
-                            </button>
-                            
-                            <div style="font-size: 0.8rem; color: #777; margin-top: 15px; text-align: center;">
-                                Levantamentos processados em 1-3 dias úteis
                             </div>
                         </div>
                     </div>
@@ -600,49 +1284,669 @@
         </div>
     </div>
 
+    <!-- Modal para Adicionar Fundos -->
+    <div class="modal" id="add-funds-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Adicionar Fundos</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="deposit-amount">Valor do Depósito</label>
+                <div class="amount-input">
+                    <input type="number" class="form-control" id="deposit-amount" placeholder="0.00" min="10">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="deposit-method">Método de Pagamento</label>
+                <select class="form-control" id="deposit-method">
+                    <option value="visa">Cartão Visa</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bank">Transferência Bancária</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="confirm-deposit" style="width: 100%; margin-top: 20px;">
+                <i class="fas fa-check"></i> Confirmar Depósito
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal para Levantamento -->
+    <div class="modal" id="withdraw-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Solicitar Levantamento</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="withdrawal-amount">Valor do Levantamento</label>
+                <div class="amount-input">
+                    <input type="number" class="form-control" id="withdrawal-amount" placeholder="0.00" min="10" max="12458.75">
+                </div>
+                <div style="font-size: 0.8rem; color: #777; margin-top: 5px;">
+                    Saldo disponível: <span id="available-balance">$12,458.75</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="withdrawal-method">Método de Levantamento</label>
+                <select class="form-control" id="withdrawal-method">
+                    <option value="bank">Conta Bancária</option>
+                    <option value="visa">Cartão Visa</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="withdrawal-notes">Notas (opcional)</label>
+                <textarea class="form-control" id="withdrawal-notes" rows="2" placeholder="Adicione uma descrição para esta transação"></textarea>
+            </div>
+            <button class="btn btn-primary" id="confirm-withdrawal" style="width: 100%; margin-top: 20px;">
+                <i class="fas fa-paper-plane"></i> Solicitar Levantamento
+            </button>
+        </div>
+    </div>
+
+    <!-- Notificações -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">Operação realizada com sucesso!</span>
+    </div>
+
     <script>
-        // Alternar visibilidade do saldo
-        document.querySelector('.fa-eye').addEventListener('click', function() {
-            const balanceAmount = document.querySelector('.balance-amount');
-            if (balanceAmount.textContent === '$12,458.75') {
-                balanceAmount.textContent = '••••••';
-                this.classList.remove('fa-eye');
-                this.classList.add('fa-eye-slash');
-            } else {
-                balanceAmount.textContent = '$12,458.75';
-                this.classList.remove('fa-eye-slash');
-                this.classList.add('fa-eye');
+        // Elementos da DOM
+        const authContainer = document.getElementById('auth-container');
+        const dashboard = document.getElementById('dashboard');
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const authForms = document.querySelectorAll('.auth-form');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const googleLoginBtn = document.getElementById('google-login');
+        const googleRegisterBtn = document.getElementById('google-register');
+        const togglePasswordBtns = document.querySelectorAll('.toggle-password');
+        const userAvatar = document.getElementById('user-avatar');
+        const userDropdown = document.getElementById('user-dropdown');
+        const logoutButton = document.getElementById('logout-button');
+        const toggleBalance = document.getElementById('toggle-balance');
+        const balanceAmount = document.getElementById('balance-amount');
+        const availableBalance = document.getElementById('available-balance');
+        const addFundsBtn = document.getElementById('add-funds');
+        const withdrawFundsBtn = document.getElementById('withdraw-funds');
+        const addFundsModal = document.getElementById('add-funds-modal');
+        const withdrawModal = document.getElementById('withdraw-modal');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        const confirmDepositBtn = document.getElementById('confirm-deposit');
+        const confirmWithdrawalBtn = document.getElementById('confirm-withdrawal');
+        const tradingChartCanvas = document.getElementById('tradingChart');
+        const pairButtons = document.querySelectorAll('.pair-button');
+        const timeframeButtons = document.querySelectorAll('.timeframe-button');
+        const chartTypeButtons = document.querySelectorAll('.chart-type-button');
+        const indicatorButtons = document.querySelectorAll('.indicator-button');
+        const tradeTypeButtons = document.querySelectorAll('.trade-type-button');
+        const executeTradeBtn = document.getElementById('execute-trade');
+        const marketList = document.getElementById('market-list');
+        const addPaymentMethodBtn = document.getElementById('add-payment-method');
+        const paymentMethods = document.getElementById('payment-methods');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
+
+        // Estado da aplicação
+        let isLoggedIn = false;
+        let balance = 12458.75;
+        let balanceVisible = true;
+        let currentPair = 'EUR/USD';
+        let currentTimeframe = '15m';
+        let currentChartType = 'candlestick';
+        let currentTradeType = 'buy';
+        let chart;
+
+        // Dados de mercado em tempo real
+        const marketData = [
+            { pair: 'EUR/USD', price: 1.07245, change: 0.0021, changePercent: 0.20 },
+            { pair: 'GBP/USD', price: 1.24560, change: 0.0018, changePercent: 0.15 },
+            { pair: 'USD/JPY', price: 149.234, change: -0.120, changePercent: -0.08 },
+            { pair: 'AUD/USD', price: 0.65210, change: 0.0021, changePercent: 0.32 },
+            { pair: 'USD/CAD', price: 1.36780, change: -0.0015, changePercent: -0.11 },
+            { pair: 'BTC/USD', price: 34567.89, change: 427.50, changePercent: 1.25 }
+        ];
+
+        // Inicializar gráfico
+        function initChart() {
+            const ctx = tradingChartCanvas.getContext('2d');
+            
+            // Dados simulados para o gráfico
+            const data = {
+                labels: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
+                datasets: [{
+                    label: currentPair,
+                    data: [1.0700, 1.0715, 1.0720, 1.0710, 1.0725, 1.0730, 1.0720, 1.0725, 1.0720, 1.0725],
+                    borderColor: '#1a2a6c',
+                    backgroundColor: 'rgba(26, 42, 108, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            };
+            
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        y: {
+                            position: 'right',
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            };
+            
+            // Destruir gráfico anterior se existir
+            if (chart) {
+                chart.destroy();
             }
-        });
-        
-        // Validação do formulário de levantamento
-        document.querySelector('.btn-primary').addEventListener('click', function() {
-            const amount = document.getElementById('withdrawal-amount').value;
-            const method = document.getElementById('withdrawal-method').value;
             
-            if (!amount || amount < 10) {
-                alert('Por favor, insira um valor válido (mínimo $10)');
-                return;
-            }
+            // Criar novo gráfico
+            chart = new Chart(ctx, config);
+        }
+
+        // Atualizar dados de mercado em tempo real
+        function updateMarketData() {
+            marketList.innerHTML = '';
             
-            if (amount > 12458.75) {
-                alert('Valor excede o saldo disponível');
-                return;
-            }
-            
-            alert(`Levantamento de $${amount} solicitado via ${method}. Processaremos sua solicitação em 1-3 dias úteis.`);
-            
-            // Reset do formulário
-            document.getElementById('withdrawal-amount').value = '';
-            document.getElementById('withdrawal-notes').value = '';
-        });
-        
-        // Navegação entre itens do menu
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
+            marketData.forEach(item => {
+                const marketItem = document.createElement('div');
+                marketItem.className = 'market-info';
+                
+                marketItem.innerHTML = `
+                    <span class="market-pair">${item.pair}</span>
+                    <span class="market-price ${item.change >= 0 ? 'positive' : 'negative'}">${item.price.toLocaleString(undefined, { minimumFractionDigits: item.pair.includes('JPY') ? 3 : 5 })}</span>
+                    <span class="${item.change >= 0 ? 'positive' : 'negative'}">${item.change >= 0 ? '+' : ''}${item.changePercent.toFixed(2)}%</span>
+                `;
+                
+                marketList.appendChild(marketItem);
             });
+        }
+
+        // Simular mudanças de preço em tempo real
+        function simulatePriceChanges() {
+            marketData.forEach(item => {
+                // Simular pequena variação de preço
+                const change = (Math.random() - 0.5) * 0.001;
+                item.price += change;
+                item.change += change;
+                item.changePercent = (item.change / (item.price - item.change)) * 100;
+            });
+            
+            updateMarketData();
+        }
+
+        // Mostrar notificação
+        function showNotification(message, type) {
+            notificationText.textContent = message;
+            notification.className = `notification ${type} active`;
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 3000);
+        }
+
+        // Login com Google (simulado)
+        function loginWithGoogle() {
+            showNotification('Redirecionando para autenticação Google...', 'info');
+            
+            setTimeout(() => {
+                showNotification('Login com Google realizado com sucesso!', 'success');
+                isLoggedIn = true;
+                authContainer.style.display = 'none';
+                dashboard.classList.add('active');
+                
+                // Inicializar componentes do dashboard
+                initChart();
+                updateMarketData();
+            }, 1500);
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Alternar entre login e registro
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.dataset.tab;
+                    
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    authForms.forEach(form => form.classList.remove('active'));
+                    document.getElementById(`${target}-form`).classList.add('active');
+                });
+            });
+            
+            // Alternar visibilidade da senha
+            togglePasswordBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const input = this.previousElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+            
+            // Login com Google
+            googleLoginBtn.addEventListener('click', loginWithGoogle);
+            googleRegisterBtn.addEventListener('click', loginWithGoogle);
+            
+            // Login tradicional (simulado)
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Efetuando login...', 'info');
+                
+                setTimeout(() => {
+                    showNotification('Login realizado com sucesso!', 'success');
+                    isLoggedIn = true;
+                    authContainer.style.display = 'none';
+                    dashboard.classList.add('active');
+                    
+                    // Inicializar componentes do dashboard
+                    initChart();
+                    updateMarketData();
+                }, 1000);
+            });
+            
+            // Registro tradicional (simulado)
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Criando sua conta...', 'info');
+                
+                setTimeout(() => {
+                    showNotification('Conta criada com sucesso!', 'success');
+                    isLoggedIn = true;
+                    authContainer.style.display = 'none';
+                    dashboard.classList.add('active');
+                    
+                    // Inicializar componentes do dashboard
+                    initChart();
+                    updateMarketData();
+                }, 1000);
+            });
+            
+            // Dropdown do usuário
+            userAvatar.addEventListener('click', () => {
+                userDropdown.classList.toggle('active');
+            });
+            
+            // Logout
+            logoutButton.addEventListener('click', () => {
+                showNotification('Saindo da plataforma...', 'info');
+                
+                setTimeout(() => {
+                    isLoggedIn = false;
+                    dashboard.classList.remove('active');
+                    authContainer.style.display = 'flex';
+                    userDropdown.classList.remove('active');
+                    showNotification('Logout realizado com sucesso', 'success');
+                }, 1000);
+            });
+            
+            // Alternar visibilidade do saldo
+            toggleBalance.addEventListener('click', () => {
+                balanceVisible = !balanceVisible;
+                if (balanceVisible) {
+                    balanceAmount.textContent = `$${balance.toFixed(2)}`;
+                    availableBalance.textContent = `$${balance.toFixed(2)}`;
+                    toggleBalance.classList.remove('fa-eye-slash');
+                    toggleBalance.classList.add('fa-eye');
+                } else {
+                    balanceAmount.textContent = '••••••';
+                    availableBalance.textContent = '••••••';
+                    toggleBalance.classList.remove('fa-eye');
+                    toggleBalance.classList.add('fa-eye-slash');
+                }
+            });
+            
+            // Abrir modal de adicionar fundos
+            addFundsBtn.addEventListener('click', () => {
+                addFundsModal.classList.add('active');
+            });
+            
+            // Abrir modal de levantamento
+            withdrawFundsBtn.addEventListener('click', () => {
+                withdrawModal.classList.add('active');
+            });
+            
+            // Fechar modais
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    addFundsModal.classList.remove('active');
+                    withdrawModal.classList.remove('active');
+                });
+            });
+            
+            // Confirmar depósito
+            confirmDepositBtn.addEventListener('click', () => {
+                const amount = parseFloat(document.getElementById('deposit-amount').value);
+                
+                if (!amount || amount < 10) {
+                    showNotification('Valor mínimo de depósito é $10', 'error');
+                    return;
+                }
+                
+                // Simular processamento
+                showNotification(`Processando depósito de $${amount.toFixed(2)}...`, 'info');
+                
+                setTimeout(() => {
+                    // Atualizar saldo
+                    balance += amount;
+                    if (balanceVisible) {
+                        balanceAmount.textContent = `$${balance.toFixed(2)}`;
+                        availableBalance.textContent = `$${balance.toFixed(2)}`;
+                    }
+                    
+                    // Adicionar ao histórico
+                    const historyList = document.getElementById('history-list');
+                    const newDeposit = document.createElement('div');
+                    newDeposit.className = 'history-item deposit';
+                    newDeposit.innerHTML = `
+                        <div class="history-details">
+                            <div class="history-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="history-info">
+                                <h4>Depósito</h4>
+                                <p>${new Date().toLocaleDateString('pt-BR')} • ${document.getElementById('deposit-method').value}</p>
+                            </div>
+                        </div>
+                        <div class="history-amount">+ $${amount.toFixed(2)}</div>
+                    `;
+                    historyList.prepend(newDeposit);
+                    
+                    // Fechar modal e limpar
+                    addFundsModal.classList.remove('active');
+                    document.getElementById('deposit-amount').value = '';
+                    
+                    showNotification(`Depósito de $${amount.toFixed(2)} realizado com sucesso!`, 'success');
+                }, 1500);
+            });
+            
+            // Confirmar levantamento
+            confirmWithdrawalBtn.addEventListener('click', () => {
+                const amount = parseFloat(document.getElementById('withdrawal-amount').value);
+                
+                if (!amount || amount < 10) {
+                    showNotification('Valor mínimo de levantamento é $10', 'error');
+                    return;
+                }
+                
+                if (amount > balance) {
+                    showNotification('Valor excede o saldo disponível', 'error');
+                    return;
+                }
+                
+                // Simular processamento
+                showNotification(`Processando levantamento de $${amount.toFixed(2)}...`, 'info');
+                
+                setTimeout(() => {
+                    // Atualizar saldo
+                    balance -= amount;
+                    if (balanceVisible) {
+                        balanceAmount.textContent = `$${balance.toFixed(2)}`;
+                        availableBalance.textContent = `$${balance.toFixed(2)}`;
+                    }
+                    
+                    // Adicionar ao histórico
+                    const historyList = document.getElementById('history-list');
+                    const newWithdrawal = document.createElement('div');
+                    newWithdrawal.className = 'history-item withdrawal';
+                    newWithdrawal.innerHTML = `
+                        <div class="history-details">
+                            <div class="history-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="history-info">
+                                <h4>Levantamento</h4>
+                                <p>${new Date().toLocaleDateString('pt-BR')} • ${document.getElementById('withdrawal-method').value}</p>
+                                <span class="status-badge status-processing">Processando</span>
+                            </div>
+                        </div>
+                        <div class="history-amount">- $${amount.toFixed(2)}</div>
+                    `;
+                    historyList.prepend(newWithdrawal);
+                    
+                    // Fechar modal e limpar
+                    withdrawModal.classList.remove('active');
+                    document.getElementById('withdrawal-amount').value = '';
+                    document.getElementById('withdrawal-notes').value = '';
+                    
+                    showNotification(`Levantamento de $${amount.toFixed(2)} solicitado com sucesso!`, 'success');
+                }, 1500);
+            });
+            
+            // Pares de moedas
+            pairButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    pairButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPair = this.dataset.pair;
+                    
+                    // Simular atualização do gráfico
+                    showNotification(`Carregando dados para ${currentPair}...`, 'info');
+                    setTimeout(() => {
+                        initChart();
+                        showNotification(`Gráfico de ${currentPair} carregado`, 'success');
+                    }, 800);
+                });
+            });
+            
+            // Timeframes
+            timeframeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    timeframeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTimeframe = this.dataset.timeframe;
+                    
+                    // Simular atualização do gráfico
+                    showNotification(`Atualizando para timeframe ${currentTimeframe}...`, 'info');
+                    setTimeout(() => {
+                        initChart();
+                        showNotification(`Gráfico atualizado para ${currentTimeframe}`, 'success');
+                    }, 800);
+                });
+            });
+            
+            // Tipos de gráfico
+            chartTypeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    chartTypeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentChartType = this.dataset.type;
+                    
+                    // Atualizar gráfico
+                    showNotification(`Gráfico alterado para ${currentChartType}`, 'info');
+                });
+            });
+            
+            // Indicadores
+            indicatorButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Toggle do indicador
+                    this.classList.toggle('active');
+                    
+                    const indicator = this.dataset.indicator;
+                    const isActive = this.classList.contains('active');
+                    
+                    showNotification(`${isActive ? 'Ativando' : 'Desativando'} indicador ${indicator.toUpperCase()}`, 'info');
+                });
+            });
+            
+            // Tipo de trade (compra/venda)
+            tradeTypeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    tradeTypeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTradeType = this.dataset.tradeType;
+                });
+            });
+            
+            // Executar trade
+            executeTradeBtn.addEventListener('click', () => {
+                const amount = parseFloat(document.getElementById('trade-amount').value) || 0;
+                
+                if (amount < 10) {
+                    showNotification('Valor mínimo de investimento é $10', 'error');
+                    return;
+                }
+                
+                if (amount > 10000) {
+                    showNotification('Valor máximo de investimento é $10,000', 'error');
+                    return;
+                }
+                
+                // Simular execução do trade
+                showNotification(`Executando ${currentTradeType === 'buy' ? 'COMPRA' : 'VENDA'} de ${currentPair} no valor de $${amount}...`, 'info');
+                
+                setTimeout(() => {
+                    // Gerar resultado aleatório do trade
+                    const profit = (Math.random() - 0.3) * amount * 0.1;
+                    const isProfit = profit > 0;
+                    
+                    // Atualizar saldo
+                    balance += profit;
+                    if (balanceVisible) {
+                        balanceAmount.textContent = `$${balance.toFixed(2)}`;
+                    }
+                    
+                    // Adicionar ao histórico
+                    const historyList = document.getElementById('history-list');
+                    const newTrade = document.createElement('div');
+                    newTrade.className = 'history-item trade';
+                    newTrade.innerHTML = `
+                        <div class="history-details">
+                            <div class="history-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="history-info">
+                                <h4>Trade - ${currentPair}</h4>
+                                <p>${new Date().toLocaleDateString('pt-BR')} • ${currentTradeType === 'buy' ? 'COMPRA' : 'VENDA'}</p>
+                            </div>
+                        </div>
+                        <div class="history-amount ${isProfit ? 'positive' : 'negative'}">${isProfit ? '+' : ''}$${profit.toFixed(2)}</div>
+                    `;
+                    historyList.prepend(newTrade);
+                    
+                    showNotification(`Trade ${isProfit ? 'lucrativo' : 'com prejuízo'} de ${isProfit ? '+' : ''}$${profit.toFixed(2)}`, isProfit ? 'success' : 'error');
+                }, 1500);
+            });
+            
+            // Gestão de métodos de pagamento
+            paymentMethods.addEventListener('click', (e) => {
+                const paymentCard = e.target.closest('.payment-card');
+                if (paymentCard) {
+                    // Remover active de todos
+                    document.querySelectorAll('.payment-card').forEach(card => {
+                        card.classList.remove('active');
+                    });
+                    // Adicionar active ao selecionado
+                    paymentCard.classList.add('active');
+                }
+                
+                // Editar método de pagamento
+                if (e.target.closest('.edit-payment')) {
+                    e.stopPropagation();
+                    showNotification('Editando método de pagamento...', 'info');
+                }
+                
+                // Remover método de pagamento
+                if (e.target.closest('.delete-payment')) {
+                    e.stopPropagation();
+                    const methodCard = e.target.closest('.payment-card');
+                    const methodName = methodCard.querySelector('.payment-name').textContent;
+                    
+                    if (confirm(`Tem certeza que deseja remover ${methodName}?`)) {
+                        methodCard.style.opacity = '0.5';
+                        setTimeout(() => {
+                            methodCard.remove();
+                            showNotification(`${methodName} removido com sucesso`, 'success');
+                        }, 500);
+                    }
+                }
+            });
+            
+            // Adicionar método de pagamento
+            addPaymentMethodBtn.addEventListener('click', () => {
+                showNotification('Adicionando novo método de pagamento...', 'info');
+                
+                // Simular adição de método de pagamento
+                setTimeout(() => {
+                    const newPaymentCard = document.createElement('div');
+                    newPaymentCard.className = 'payment-card';
+                    newPaymentCard.dataset.method = 'bank';
+                    newPaymentCard.innerHTML = `
+                        <div class="payment-actions">
+                            <div class="payment-action edit-payment" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="payment-action delete-payment" title="Remover">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                        <i class="fas fa-university payment-icon"></i>
+                        <div class="payment-name">Transferência</div>
+                        <div class="payment-details">Banco Nacional</div>
+                    `;
+                    paymentMethods.appendChild(newPaymentCard);
+                    
+                    showNotification('Método de pagamento adicionado com sucesso!', 'success');
+                }, 1000);
+            });
+            
+            // Fechar modais ao clicar fora
+            window.addEventListener('click', (e) => {
+                if (e.target === addFundsModal) {
+                    addFundsModal.classList.remove('active');
+                }
+                if (e.target === withdrawModal) {
+                    withdrawModal.classList.remove('active');
+                }
+            });
+            
+            // Fechar dropdown ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!userAvatar.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+            
+            // Simular atualizações de mercado em tempo real
+            setInterval(simulatePriceChanges, 5000);
         });
     </script>
 </body>
